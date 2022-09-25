@@ -1,0 +1,12 @@
+{% extends "_base.html" %}
+{% block title %} Product Listing{% endblock %}
+{% block main %}
+    <h2> Product Listing</h2>
+    <p>We tell you... Product Listing</p>
+    {% for product in productList %}
+    <h2>{{product.part_number}}</h2>
+    <h2>{{product.brand}}</h2>
+    <h2>{{product.brand.made_in}}</h2>
+    {% endfor %}
+    
+{% endblock %}
