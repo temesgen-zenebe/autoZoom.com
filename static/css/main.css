@@ -3,11 +3,70 @@
 body{
     font-family: 'Poppins', sans-serif;
     background: #fff;
-    font-size: 15px;
+    font-size: 14px;
 }
 .font-tickers{
     font-weight: lighter;
     font-size: 12px;
+}
+
+.product-price-discount {
+	font-size: 18px;
+    font-weight: 400;
+    padding: 10px 0;
+    clear: both;
+}
+.product-price-discount span.line-through {
+	text-decoration: line-through;
+    margin-left: 10px;
+    font-size: 14px;
+    vertical-align: middle;
+    color: #a5a5a5;
+}
+
+
+.reviews-counter {
+    font-size: 12px;
+}
+.reviews-counter span {
+	vertical-align: -10;
+}
+.rate {
+    float: left;
+    padding: 0 10px 0 0;
+    margin: 0 0 0 auto;
+}
+.rate:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+}
+.rate:not(:checked) > label {
+    float: right;
+    width: 15px;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 21px;
+    color:#ccc;
+	margin-bottom: 0;
+	line-height: 21px;
+}
+.rate:not(:checked) > label:before {
+    content: '\2605';
+}
+.rate > input:checked ~ label {
+    color: #ffc700;    
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color: #deb217;  
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: #c59b08;
 }
 
 
