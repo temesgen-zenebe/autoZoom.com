@@ -1,22 +1,26 @@
 {% extends "_base.html" %}
+{% load static %}
+{% block javascript %}
+   <script type="text/javascript" src="{% static 'js/main.js' %}" defer ></script>
+{% endblock %}
 {% block title %} Product Listing{% endblock %}
 {% block main %}
     
     <div class="container my-3 mx-auto rounded" style="max-width: 98%;">
         <div class="row gap-0 justify-content-center">
             <div class="col-12 col-sm-12 mb-3">
-              <div class="card mx-auto ">
+              <div class="card mx-auto border-0">
                 <div class="card-body ">
                   <div class="row gap-0 justify-content-center">
                     <div class=" col-12 col-sm-3 my-1"> 
-                      <div class="card ">
+                      <div class="card shadow ">
                         <div class="card-body">
-                          <img src="https://5.imimg.com/data5/IQ/WP/MY-10821690/taper-roller-bearings-250x250.png"  style="width:90px;hight:150px;" class="rounded mx-auto d-block" alt="...">
+                          <img src="{% static 'images/skf-hero2.png' %}"  style="max-width:100%;hight:100px;" class="rounded mx-auto d-block" alt="...">
                         </div>
                       </div>
                     </div>
                     <div class=" col-12 col-sm-9">
-                      <div class="card">
+                      <div class="card shadow">
                         <div class="card-body">
                           
                           <div class="row my-3">
@@ -56,7 +60,7 @@
               </div>
             </div>
             <div class="col-12 col-sm-12 ">
-              <div class="card mx-auto ">
+              <div class="card mx-auto border-0">
                 <div class="card-header bg-white ">
                   Searching Result : 500
                 </div>
@@ -73,8 +77,8 @@
                                 <span class="badge text-bg-primary m-1">{{product.label}}</span>
                             {% endif %}
                         </div>
-                        {% if product.picture.picture2 %}
-                        <img src="{{product.picture.picture2.url}}" 
+                        {% if product.picture.picture %}
+                        <img src="{{product.picture.picture.url}}" 
                          style="width:100%;hight:100px;" 
                          class="rounded card-img-top mx-auto d-block" alt="...">
                         {% else %} 
@@ -137,22 +141,6 @@
                 </div>
               </div>
             </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            
-                
-                <h2> Product Listing</h2>
-                <p>We tell you... Product Listing</p>
-    
-                {% for product in productList %}
-                <h2>{{product.part_number}}</h2>
-                <h2>{{product.brand}}</h2>
-                <h2>{{product.brand.made_in}}</h2>
-                {% endfor %}
-           
-          </div>
-         
         </div>
     </div>
 {% endblock %}
