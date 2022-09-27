@@ -5,8 +5,14 @@ body{
     background: #fff;
     font-size: 14px;
 }
+a{
+    text-decoration: none;
+}
 .font-tickers{
     font-weight: lighter;
+    font-size: 12px;
+}
+.product-price{
     font-size: 12px;
 }
 
@@ -29,11 +35,11 @@ body{
     font-size: 12px;
 }
 .reviews-counter span {
-	vertical-align: -10;
+	vertical-align: -2;
 }
 .rate {
     float: left;
-    padding: 0 10px 0 0;
+    padding: 0 5px 0 0;
     margin: 0 0 0 auto;
 }
 .rate:not(:checked) > input {

@@ -67,15 +67,18 @@
                 <div class="card-body">
                   <div class="row row-cols-1 row-cols-md-5 g-4">
                     {% for product in productList %}
+                    <a href="{% url 'products:product-detail' product.slug %}">
                     <div class="col">
                       <div class="card shadow h-100">
-                        <div class="d-flex justify-content-start">
+                        
+                        <div class="d-flex justify-content-end">
                             {% if product.tags == 'sell' and product.off_price_parentage %}
                                 <span class="badge text-bg-danger m-1 ">{{product.tags}}</span>
                             {% endif %}
                             {% if product.label %}
                                 <span class="badge text-bg-primary m-1">{{product.label}}</span>
                             {% endif %}
+                            
                         </div>
                         {% if product.picture.picture %}
                         <img src="{{product.picture.picture.url}}" 
@@ -116,10 +119,12 @@
                                     <input type="radio" id="star1" name="rate" value="1" />
                                     <label for="star1" title="text">1 star</label>
                                 </div>
-                                <span>3 Reviews</span>
+                                <span class="">( 1,205 )</span>
                             </div>
+                            
                             <div class="product-price-discount">
-                                <span class="card-text text-muted"><small>Birr</small></span>
+                                <div class="reviews-counter text-muted pr-2"><span>300 Reviews</span></div>
+                                <span class="card-text text-muted"><small>Br</small></span>
                                 {% if product.tags == 'sell' and product.off_price_parentage%}
                                 <span>{{product.off_price}}</span>
                                 <span class="line-through">{{product.price}}</span>
@@ -128,14 +133,15 @@
                                 {% endif %}
                             </div>
                             
-                            <div class="btn-group btn-group-sm text-center" role="group" aria-label="Small button group">
-                                <button type="button" class="btn btn-outline-primary">Ditail</button>
-                                <button type="button" class="btn btn-outline-primary">Add</button>
-                                <button type="button" class="btn btn-outline-primary">Buy</button>
+                            <div class="btn-group btn-group-sm text-center d-flex mx-auto" role="group" aria-label="Small button group">
+                                <button type="button" class="btn btn-outline-primary">Ditail <i class="bi bi-info-square"></i></button>
+                                <button type="button" class="btn btn-outline-primary">Add <i class="bi bi-cart-plus"></i></button>
+                                <button type="button" class="btn btn-outline-primary">Buy <i class="bi bi-bag-heart"></i></button>
                             </div>
                         </div>
                       </div>
                     </div>
+                    </a>
                     {% endfor %}
                   </div>
                 </div>
