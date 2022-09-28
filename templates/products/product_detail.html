@@ -65,8 +65,8 @@
                                     <div class="product-dtl">
                                         <div class="product-info">
                                             <div class="">
-                                                <small class="card-text text-muted">{{productDetail.product_name}}</small>
-                                                <h5 class="card-title">
+                                                <small class="card-text text-muted ">{{productDetail.product_name}}</small>
+                                                <h5 class="card-title my-2">
                                                     <strong>{{productDetail.part_number}} {{productDetail.brand}} {{productDetail.brand.made_in}}</strong>
                                                 </h5>
                                             </div>
@@ -86,7 +86,7 @@
                                                   <span class="">( 1,205 )</span>
                                             </div>
                                             <div class="product-price-discount">
-                                                <div class="reviews-counter text-muted pr-2"><span>300 Reviews</span></div>
+                                                <div class="reviews-counter text-muted pr-2 my-2"><span>300 Reviews</span></div>
                                                 <span class="text-muted product-name"><small>Br</small></span>
                                                 {% if productDetail.tags == 'sell' and productDetail.off_price_parentage%}
                                                 <span>{{productDetail.off_price}}</span>
@@ -96,14 +96,15 @@
                                                 {% endif %}
                                                 <span class="text-muted product-price pr-2 "><small>unit price </small></span>
                                             </div>
+                                            <div class="small py-2">Delivery : <span class="px-2">{{productDetail.shipping}}</span></div>
                                         </div>
                                         <div><p>{{productDetail.description|truncatechars:300}}</p></div>
                                         <div class="d-flex gap-2">
                                             <label for="size">Quantity</label>
                                             <form action="#" class="display-flex">
-                                                <input class="form-control form-control-sm me-2" type = "number" max="{{productDetail.stock_info.quantity}}" min="1" value = "1">
-                                             </form>
-                                             <div> <span class="text-muted product-name"><small>anly 50 Quantity Left</small></span></div>
+                                                <input class="form-control form-control-sm me-2" type="number" name="quantity" max="{{productDetail.stock_info.quantity}}" min="1" value = "1">
+                                            </form>
+                                            <div> <span class="text-muted small"><small>anly 10 Quantity Left out of 1000</small></span></div>
                                         </div>
                                         <div class="gap-2 d-md-flex justify-content-md-end mt-4 " role="group" aria-label="Small button group">
                                             <a href="{% url 'products:product-list' %}" type="button" class="btn btn-sm btn-outline-primary"><i class="bi bi-arrow-left-square"></i> Catalog </a>
@@ -119,7 +120,7 @@
 			</div>
 		</div> 
 	</div>
-    <div class="row mb-5">
+    <div class="row mb-3">
         <div class="col-md-12">
 			<div class="card border-0">
 				<div class="card-body">
@@ -128,43 +129,76 @@
                         <div class="col-12 col-md-12  py-3">
                              <nav class="">
                                 <div class="nav nav-tabs shadow mx-3" id="nav-tab" role="tablist">
-                                  <button class="nav-link active small" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Describtion</button>
-                                  <button class="nav-link small" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">rate&reviews</button>
-                                  <button class="nav-link small" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Return</button>
-                                  <button class="nav-link small" id="nav-disabled-tab" data-bs-toggle="tab" data-bs-target="#nav-disabled" type="button" role="tab" aria-controls="nav-disabled" aria-selected="false" disabled>FAQ</button>
+                                  <button class="nav-link active small-x" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Describtion</button>
+                                  <button class="nav-link small-x" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Ratteing  & Reviews</button>
+                                  
+                                  <button class="nav-link small-x" id="nav-disabled-tab" data-bs-toggle="tab" data-bs-target="#nav-faq" type="button" role="tab" aria-controls="nav-faq" aria-selected="false">FAQ</button>
                                 </div>
                               </nav>
                               <div class="tab-content m-0 border-0 bd-example" id="nav-tabContent">
                                 <div class="tab-pane fade show m-0 active " id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
                                     
-                                    <table class="table ">
+                                    <table class="table my-3">
                                         <tr >
-                                          <th scope="row" >Catagory</th>
-                                          <td colspan="6" >{{productDetail.product_name}}</td>
+                                          <th scope="row">Catagory</th>
+                                          <td colspan="6" class="small-x">{{productDetail.product_name}}</td>
                                         </tr>
                                         <tr>
                                           <th scope="row" colspan="1">PartNumber</th>
-                                          <td colspan="6">{{productDetail.part_number}}</td>
+                                          <td colspan="6" class="small-x">{{productDetail.part_number}}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Brand</th>
-                                            <td colspan="6">{{productDetail.brand}}</td>
+                                            <td colspan="6" class="small-x">{{productDetail.brand}}</td>
                                         </tr>
                                         <tr>
-                                            <th scope="row">madeIn</th>
-                                            <td colspan="6">{{productDetail.brand.made_in}}</td>
+                                            <th scope="row">MadeIn</th>
+                                            <td colspan="6" class="small-x">{{productDetail.brand.made_in}}</td>
                                         </tr>
                                         <tr>
-                                          <th scope="row">djfgsdhfg</th>
-                                          <td colspan="6">Using color to add meaning only provides a visual indication, which will not be conveyed to users of assistive technologies – such as screen readers. Ensure that information denoted by the color is either obvious from the</td>
-                                          
+                                            <th scope="row">Measurement</th>
+                                            <td colspan="6" class="small-x">{{productDetail.description.measurement}}</td>
                                         </tr>
+                                        <tr>
+                                            <th scope="row">Industry</th>
+                                            <td colspan="6" class="small-x">{{productDetail.description.industry}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Application</th>
+                                            <td colspan="6" class="small-x">{{productDetail.description.application}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Product_states</th>
+                                            <td colspan="6" class="small-x">{{productDetail.description.product_states}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Return_police</th>
+                                            <td colspan="6" class="small-x" >{{productDetail.return_police}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Product_location</th>
+                                            <td colspan="6" class="small-x">{{productDetail.stock_info.product_location}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Supplier</th>
+                                            <td colspan="6">
+                                                
+                                                <a href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="text-decoration-none" >{{productDetail.stock_info.Supplier}} 
+                                                    <i class="bi bi-arrow-up-right-square mx-2"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                          <th scope="row">Description</th>
+                                          <td colspan="6" class="small-x">{{productDetail.description}}.</td>
+                                        </tr>
+
                                       </tbody>
                                     </table>
                                 </div>
                                 <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">...</div>
-                                <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">...</div>
-                                <div class="tab-pane fade" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0">...</div>
+                                
+                                <div class="tab-pane fade" id="nav-faq" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0">...</div>
                               </div>
 						</div>
 					</div>
@@ -172,5 +206,95 @@
 			</div>
 		</div>
 	</div>
+</div>
+<!-- Button trigger modal 
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    Launch static backdrop modal
+</button>
+-->
+  
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div  class="modal-dialog modal-xl modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h6 class="modal-title" id="staticBackdropLabel">Supplier Profile</h6>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="container shadow  my-2  mx-auto rounded" style="max-width: 97%;">
+                <div class="row mb-5">
+                    <div class="col-md-12">
+                        <div class="card border-0">
+                            <div class="card-body">
+                                <div class="row mx-2">
+                                    <div class="col-md-6">
+                                        <img class="img-thumbnail p-0 border-0" src="{% static 'images/banere1.png' %}" alt="" style="max-hight: 300px;"/>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="text">
+                                            <table class="table my-3">
+                                              
+                                                <tr>
+                                                    <th scope="row">Name</th>
+                                                    <td colspan="6" class="small-x">{{productDetail.stock_info.Supplier}} </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Supplier_location</th>
+                                                    <td colspan="6" class="small-x">{{productDetail.stock_info.Supplier.supplier_location}} </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">License_number</th>
+                                                    <td colspan="6" class="small-x">{{productDetail.stock_info.Supplier.license_number}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">License_states</th>
+                                                    <td colspan="6" class="small-x" >{{productDetail.stock_info.Supplier.license_states}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">contact_name</th>
+                                                    <td colspan="6" class="small-x" >{{productDetail.stock_info.Supplier.contact_name}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">phone</th>
+                                                    <td colspan="6" class="small-x" >{{productDetail.stock_info.Supplier.phone}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">email</th>
+                                                    <td colspan="6" class="small-x" >{{productDetail.stock_info.Supplier.email}}</td>
+                                                </tr>
+
+                                              </tbody>
+                                            </table>
+                                            <div class="reviews-counter my-1">
+                                                <div class="rate">
+                                                    <input type="radio" id="star5" name="rate" value="5" checked />
+                                                    <label for="star5" title="text">5 stars</label>
+                                                    <input type="radio" id="star4" name="rate" value="4" checked />
+                                                    <label for="star4" title="text">4 stars</label>
+                                                    <input type="radio" id="star3" name="rate" value="3" checked />
+                                                    <label for="star3" title="text">3 stars</label>
+                                                    <input type="radio" id="star2" name="rate" value="2" />
+                                                    <label for="star2" title="text">2 stars</label>
+                                                    <input type="radio" id="star1" name="rate" value="1" />
+                                                    <label for="star1" title="text">1 star</label>
+                                                  </div>
+                                                  <span class="">( 1,205 )</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
 </div>
 {% endblock %}

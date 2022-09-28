@@ -133,15 +133,15 @@
                                             <span>{{product.price}}</span>
                                             {% endif %}
                                         </div>
-                                        
+                                        </a>
                                         <div class="btn-group btn-group-sm text-center d-flex mx-auto" role="group" aria-label="Small button group">
-                                            <button type="button" class="btn btn-outline-primary">Ditail <i class="bi bi-info-square"></i></button>
+                                            <a href="{% url 'products:product-detail' product.slug %}" type="button" class="btn btn-outline-primary">Ditail <i class="bi bi-info-square"></i></a>
                                             <button type="button" class="btn btn-outline-primary">Add <i class="bi bi-cart-plus"></i></button>
                                             <button type="button" class="btn btn-outline-primary">Buy <i class="bi bi-bag-heart"></i></button>
                                         </div>
                                     </div>
                                 </div>
-                            </a>
+                            
                         </div>
                    
                     {% endfor %}

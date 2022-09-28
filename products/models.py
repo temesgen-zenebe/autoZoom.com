@@ -139,7 +139,7 @@ class Product(models.Model):
     LABEL = ((None, '--Please choose--'),('Bast seller', 'Bast seller'), ('AutoZoom Choice', 'AutoZoom Choice'),('New', 'New'),)
     RETURN_POLICE=((None, '--Please choose--'),('No Return', 'No Return'),('same day', 'same day'),('seven days', 'seven days')
                    ,('Fifteen(15) days', 'Fifteen(15) days'),('Thirty(30) days', 'Thirty(30) days'),)
-    SHIPPING = ( (None, '--Please choose--'),('Free', 'Free'),('Not Free', 'Not Free'),('Buy 5+ get free', 'Buy 5+ get free'),('let you know on checkout', 'let you know on checkout'), )
+    SHIPPING = ( (None, '--Please choose--'),('Free', 'Free'),('Not Free', 'Not Free'),('on Stor pickup', 'on Stor pickup'),('Buy 5+ get free', 'Buy 5+ get free'),('let you know on checkout', 'let you know on checkout'), )
     product_name = models.CharField(max_length=100)
     part_number = models.CharField(max_length=100)
     brand = models.ForeignKey(Brand ,on_delete=models.CASCADE, blank=True,null=True )

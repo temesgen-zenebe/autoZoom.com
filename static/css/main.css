@@ -18,6 +18,9 @@ a{
 .small{
     font-size: 12px;
 }
+.small-x{
+    font-size: 13px;
+}
 .product-price-discount {
 	font-size: 18px;
     font-weight: 400;
