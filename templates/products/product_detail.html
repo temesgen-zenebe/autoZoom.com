@@ -5,18 +5,63 @@
 {% endblock %}
 {% block title %} Product Detail {% endblock %}
 {% block main %}
-<div class="container shadow  my-5  mx-auto rounded" style="max-width: 97%;">
-    <div class="row mb-5">
-		<div class="col-md-12">
+<div class="container  mt-4 shadow mx-auto rounded" style="max-width: 97%;">
+    <div class="row my-3">
+		<div class="col-md-12 ">
 			<div class="card border-0">
 				<div class="card-body">
 					<div class="row mx-2">
-                        <div class="col-md-6">
-							<img class="img-thumbnail p-0 border-0" src="{% static 'images/banere1.png' %}" alt="" style="max-hight: 300px;"/>
+                        <div class="col-md-6 ">
+                            <div id="carouselExampleIndicators" class="carousel carousel-dark slide" data-bs-ride="false">
+                                <div class="carousel-indicators">
+                                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                                </div>
+                                <div class="carousel-inner">
+                                  <div class="carousel-item active">
+                                    {% if productDetail.picture.picture %}
+                                    <img src="{{ productDetail.picture.picture.url}}" class="d-block w-100" width="600" height="300"  alt="{{productDetail.picture.alt}}">
+                                    {% else %}
+                                    <img src="{% static 'images/placeholder.png' %}" class="d-block w-100" width="600" height="300"  alt="{{productDetail.picture.alt}}">
+                                    {% endif %}
+                                  </div>
+                                  <div class="carousel-item">
+                                    {% if productDetail.picture.picture %}
+                                    <img src="{{ productDetail.picture.picture2.url}}" class="d-block w-100" width="600" height="300"  alt="{{productDetail.picture.alt}}">
+                                    {% else %}
+                                    <img src="{% static 'images/placeholder.png' %}" class="d-block w-100" width="600" height="300"  alt="{{productDetail.picture.alt}}">
+                                    {% endif %}
+                                  </div>
+                                  <div class="carousel-item">
+                                    {% if productDetail.picture.picture3 %}
+                                    <img src="{{ productDetail.picture.picture3.url}}" class="d-block w-100" width="600" height="300" alt="{{productDetail.picture.alt}}">
+                                    {% else %}
+                                    <img src="{% static 'images/placeholder.png' %}" class="d-block w-100" width="600" height="300"  alt="{{productDetail.picture.alt}}">
+                                    {% endif %}
+                                  </div>
+                                  <div class="carousel-item">
+                                    {% if productDetail.picture.picture4 %}
+                                    <img src="{{ productDetail.picture.picture4.url}}" class="d-block w-100" width="600" height="300" alt="{{productDetail.picture.alt}}">
+                                    {% else %}
+                                    <img src="{% static 'images/placeholder.png' %}" class="d-block w-100" width="600" height="300"  alt="{{productDetail.picture.alt}}">
+                                    {% endif %}
+                                  </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                  <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                  <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
 						</div>
-						<div class="col-md-6 my-3">
+						<div class="col-md-6 my-3 ">
 							<div class="text">
-								<div class="col-md-12">
+								<div class="col-md-12 ">
                                     <div class="product-dtl">
                                         <div class="product-info">
                                             <div class="">
@@ -56,22 +101,72 @@
                                         <div class="d-flex gap-2">
                                             <label for="size">Quantity</label>
                                             <form action="#" class="display-flex">
-                                                    <input class="form-control form-control-sm me-2" type = "number" max="{{productDetail.stock_info.quantity}}" min="1" value = "1">
+                                                <input class="form-control form-control-sm me-2" type = "number" max="{{productDetail.stock_info.quantity}}" min="1" value = "1">
                                              </form>
-                                             <div>
-                                                <label for="size">stock info :</label> 
-                                                <span class="text-muted product-name"><small>50 Quantity Left</small></span>
-                                            </div>
+                                             <div> <span class="text-muted product-name"><small>anly 50 Quantity Left</small></span></div>
                                         </div>
-                                        <div class="btn-group gap-2 btn-group-sm text-center d-flex mx-2 mt-4" role="group" aria-label="Small button group">
-                                            <button type="button" class="btn btn-outline-primary">Catalog <i class="bi bi-info-square"></i></button>
-                                            <button type="button" class="btn btn-outline-primary">Add <i class="bi bi-cart-plus"></i></button>
-                                            <button type="button" class="btn btn-outline-primary">Checkout <i class="bi bi-bag-heart"></i></button>
+                                        <div class="gap-2 d-md-flex justify-content-md-end mt-4 " role="group" aria-label="Small button group">
+                                            <a href="{% url 'products:product-list' %}" type="button" class="btn btn-sm btn-outline-primary"><i class="bi bi-arrow-left-square"></i> Catalog </a>
+                                            <button type="button" class="btn btn-sm btn-outline-primary">Add to cart<i class="bi bi-cart-plus"></i></button>
+                                            <button type="button" class="btn btn-sm btn-outline-primary">Checkout <i class="bi bi-bag-heart"></i></button>
                                         </div>
                                     </div>
                                 </div>
 							</div>
 						</div>	
+					</div>
+				</div>
+			</div>
+		</div> 
+	</div>
+    <div class="row mb-5">
+        <div class="col-md-12">
+			<div class="card border-0">
+				<div class="card-body">
+					<div class="row "> 
+                       
+                        <div class="col-12 col-md-12  py-3">
+                             <nav class="">
+                                <div class="nav nav-tabs shadow mx-3" id="nav-tab" role="tablist">
+                                  <button class="nav-link active small" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Describtion</button>
+                                  <button class="nav-link small" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">rate&reviews</button>
+                                  <button class="nav-link small" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Return</button>
+                                  <button class="nav-link small" id="nav-disabled-tab" data-bs-toggle="tab" data-bs-target="#nav-disabled" type="button" role="tab" aria-controls="nav-disabled" aria-selected="false" disabled>FAQ</button>
+                                </div>
+                              </nav>
+                              <div class="tab-content m-0 border-0 bd-example" id="nav-tabContent">
+                                <div class="tab-pane fade show m-0 active " id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+                                    
+                                    <table class="table ">
+                                        <tr >
+                                          <th scope="row" >Catagory</th>
+                                          <td colspan="6" >{{productDetail.product_name}}</td>
+                                        </tr>
+                                        <tr>
+                                          <th scope="row" colspan="1">PartNumber</th>
+                                          <td colspan="6">{{productDetail.part_number}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Brand</th>
+                                            <td colspan="6">{{productDetail.brand}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">madeIn</th>
+                                            <td colspan="6">{{productDetail.brand.made_in}}</td>
+                                        </tr>
+                                        <tr>
+                                          <th scope="row">djfgsdhfg</th>
+                                          <td colspan="6">Using color to add meaning only provides a visual indication, which will not be conveyed to users of assistive technologies – such as screen readers. Ensure that information denoted by the color is either obvious from the</td>
+                                          
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                </div>
+                                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">...</div>
+                                <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">...</div>
+                                <div class="tab-pane fade" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0">...</div>
+                              </div>
+						</div>
 					</div>
 				</div>
 			</div>
