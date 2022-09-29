@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     # Local apps 
     'products.apps.ProductsConfig',
     'pages.apps.PagesConfig', 
+    'users.apps.UsersConfig',
 
 ]
 
@@ -88,13 +89,23 @@ WSGI_APPLICATION = 'autozoom.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
+"""DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
-}
+}"""
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'autozoom',
+        'USER': 'postgres',
+        'PASSWORD': '1117t',
+        'HOST': 'localhost',
+        'PORT': 5432
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -114,6 +125,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# AUTHENTICATION SETTINGS
+AUTH_USER_MODEL = 'users.CustomUser'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/

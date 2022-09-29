@@ -138,7 +138,7 @@
                               <div class="tab-content m-0 border-0 bd-example" id="nav-tabContent">
                                 <div class="tab-pane fade show m-0 active " id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
                                     
-                                    <table class="table my-3">
+                                    <table class="table shadow my-1">
                                         <tr >
                                           <th scope="row">Catagory</th>
                                           <td colspan="6" class="small-x">{{productDetail.product_name}}</td>
@@ -218,7 +218,7 @@
     <div  class="modal-dialog modal-xl modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
-          <h6 class="modal-title" id="staticBackdropLabel">Supplier Profile</h6>
+          <h6 class="modal-title mx-3" id="staticBackdropLabel">Supplier Profile</h6>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -236,15 +236,12 @@
                                             <table class="table my-3">
                                               
                                                 <tr>
-                                                    <th scope="row">Name</th>
+                                                    <th scope="row">companyName</th>
                                                     <td colspan="6" class="small-x">{{productDetail.stock_info.Supplier}} </td>
                                                 </tr>
+                                                
                                                 <tr>
-                                                    <th scope="row">Supplier_location</th>
-                                                    <td colspan="6" class="small-x">{{productDetail.stock_info.Supplier.supplier_location}} </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">License_number</th>
+                                                    <th scope="row">LicenseNumber</th>
                                                     <td colspan="6" class="small-x">{{productDetail.stock_info.Supplier.license_number}}</td>
                                                 </tr>
                                                 <tr>
@@ -254,6 +251,10 @@
                                                 <tr>
                                                     <th scope="row">contact_name</th>
                                                     <td colspan="6" class="small-x" >{{productDetail.stock_info.Supplier.contact_name}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Location</th>
+                                                    <td colspan="6" class="small-x">{{productDetail.stock_info.Supplier.supplier_location}} </td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row">phone</th>
