@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     
     # Built-in Django apps
     'django.contrib.admin',
+    'django.contrib.admindocs',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
