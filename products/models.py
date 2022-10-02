@@ -185,3 +185,48 @@ class Product(models.Model):
 
     def __str__(self):
         return self.product_name
+    
+    
+class Service(models.Model):
+    service_name = models.CharField(max_length=100)
+    part_number = models.CharField(max_length=100)
+    brand = models.CharField(max_length=100)
+    description = models.ForeignKey(Descriptions ,on_delete=models.CASCADE, blank=True,null=True )
+    picture = models.ForeignKey(Picture ,on_delete=models.CASCADE, blank=True,null=True )
+    price = models.DecimalField(decimal_places=2,max_digits=6, blank=True,null=True  )
+    off_price_parentage = models.SmallIntegerField(blank=True , null=True)
+    off_price = models.DecimalField(decimal_places=2, max_digits=6, blank=True, null=True)
+    category = models.ForeignKey(Category ,on_delete=models.CASCADE, blank=True,null=True )
+    supplier = models.ForeignKey(Supplier ,on_delete=models.PROTECT , blank=True ,null=True )
+    location = models.CharField(max_length=100)
+    contact = models.CharField(max_length=100)
+    available = models.BooleanField(default=True)
+    created = models.DateField(auto_now_add=True)
+    update = models.DateField(auto_now=True)
+    slug = models.SlugField(max_length=50, unique=True, null=False, editable=False)
+    
+    def get_absolute_url(self):
+      return reverse('products:service-detail', kwargs={'slug': self.slug})
+  
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            value = str(self)
+            self.slug = unique_slug(value, type(self))
+            
+        if self.tags == 'sell':
+            self.off_price  = self.price - ((self.price * self.off_price_parentage)/100)
+            
+        super().save(*args, **kwargs)
+
+
+    class Meta:
+        ordering=("-service_name",) 
+     
+        
+    def createdDate(self):
+        self.created = timezone.now()
+        self.save()
+    
+    def __str__(self):
+        return self.service_name
+    

@@ -13,3 +13,6 @@ class ContactUsView(TemplateView):
     
 class TermsPolicesView(TemplateView):
     template_name = 'pages/terms_Polices.html'
+    
+class DashboardView(TemplateView):
+    template_name = 'pages/dashboard.html'

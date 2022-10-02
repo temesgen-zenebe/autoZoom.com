@@ -10,6 +10,7 @@ from .models import (
         Stock_info,
         Picture,
         Product,
+        Service,
     )
 @admin.register(Supplier_location)
 class Supplier_locationAdmin(admin.ModelAdmin):
@@ -159,3 +160,29 @@ class ProductAdmin(admin.ModelAdmin):
 
         return ()
     
+@admin.register(Service)
+class ServiceAdmin(admin.ModelAdmin):
+    model = Service
+    list_display = [
+        'service_name' ,
+        'part_number', 
+        'brand',
+        'description',
+        'picture',
+        'price',
+        'off_price_parentage',
+        'off_price', 
+        'category',
+        'supplier',
+        'location',
+        'contact',
+        'available' ,
+        'slug',
+        'created',
+        'update', 
+    ]
+    def get_readonly_fields(self, request, obj=None):
+        if obj: # editing an existing object
+            return ('slug','created','update')
+
+        return ()
