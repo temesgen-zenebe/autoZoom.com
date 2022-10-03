@@ -7,28 +7,16 @@
 {% block main %}
  <div class="container my-3 mx-auto rounded" style="max-width: 98%;">
      <!-- Example Code -->
-     <div class="mb-2 ">
+      <div class="mb-2 ">
         <div class='col-12 py-2 bg-primary text-white d-flex justify-content-between 'data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
             <div><i class="bi bi-speedometer mx-2 small-xx"></i> Manage your Dashboard</div>
-            <div><i class="bi bi-grid-3x2-gap-fill mx-2 small-xx"></i></div>
+            <div><i class="bi bi-layout-sidebar-inset mx-2 small-xx"></i></div>
         </div>
-       
       </div>  
-      <div
-        class="offcanvas offcanvas-start mx-3  "
-        tabindex="-1"
-        id="offcanvasExample"
-        aria-labelledby="offcanvasExampleLabel"
-      >
+      <div class="offcanvas offcanvas-start mx-3  " tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
         <div class="offcanvas-header">
           <h5 class="offcanvas-title" id="offcanvasExampleLabel">Dashboard</h5>
-         
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="offcanvas"
-            aria-label="Close"
-          ></button>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" ></button>
         </div>
         <div class="mx-4" >
             {% if user.avatar and not form.avatar.errors %}

@@ -61,6 +61,9 @@ INSTALLED_APPS = [
     'products.apps.ProductsConfig',
     'pages.apps.PagesConfig', 
     'users.apps.UsersConfig',
+    'buyer.apps.BuyerConfig',
+    'seller.apps.SellerConfig',
+    
 
 ]
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
