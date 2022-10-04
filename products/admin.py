@@ -1,7 +1,5 @@
 from django.contrib import admin
 from .models import (
-        Supplier_location,
-        Supplier,
         Descriptions,
         Brand,
         Category,
@@ -12,44 +10,7 @@ from .models import (
         Product,
         Service,
     )
-@admin.register(Supplier_location)
-class Supplier_locationAdmin(admin.ModelAdmin):
-    model = Supplier_location
-    list_display = [ 
-            'country',
-            'city',
-            'wereda',
-            'kebela',
-            'house_number',
-            'Building_number',
-            'created',
-            'update',
-        ]
-    def get_readonly_fields(self, request, obj=None):
-        if obj: # editing an existing object
-            return ('created','update')
 
-        return ()
-    
-@admin.register(Supplier)
-class SupplierAdmin(admin.ModelAdmin):
-    model = Supplier
-    list_display = [       
-                'company',
-                'contact_name',
-                'phone',
-                'email',
-                'supplier_location',
-                'license_number',
-                'license_states',
-                'created',
-                'update',
-            ]
-    def get_readonly_fields(self, request, obj=None):
-        if obj: # editing an existing object
-            return ('slug','created','update')
-
-        return ()
     
 @admin.register(Descriptions)
 class DescriptionsAdmin(admin.ModelAdmin):

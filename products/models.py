@@ -9,36 +9,9 @@ from django.utils.timezone import datetime
 from django.urls import reverse
 from django.utils import timezone
 from common.utils.text import unique_slug
+from seller.models import Supplier
 
-class Supplier_location(models.Model):
-    country = models.CharField(max_length=100, blank=True ,null=True )
-    city = models.CharField(max_length=100, blank=True ,null=True )
-    wereda = models.CharField(max_length=100, blank=True ,null=True )
-    kebela = models.CharField(max_length=100, blank=True ,null=True )
-    house_number = models.CharField(max_length=100, blank=True ,null=True )
-    Building_number = models.CharField(max_length=100, blank=True ,null=True )
-    created = models.DateField(auto_now_add=True)
-    update = models.DateField(auto_now=True)
-    
-    def __str__(self):
-        return self.city
-
-class Supplier(models.Model):
-    LICENSE_STATES = ((None, '--Please choose--'),('active', 'active'),('pending', 'pending'), 
-              ('suspended', 'suspended'),)
-    company = models.CharField(max_length=100,blank=True ,null=True)
-    contact_name = models.CharField(max_length=100,blank=True ,null=True)
-    phone = models.CharField(max_length=15,blank=True ,null=True)
-    email = models.CharField(max_length=100,blank=True ,null=True)
-    supplier_location = models.ForeignKey(Supplier_location ,on_delete=models.CASCADE , blank=True ,null=True )
-    license_number = models.CharField(max_length=100,blank=True ,null=True)
-    license_states = models.CharField(max_length=30, choices=LICENSE_STATES)
-    created = models.DateField(auto_now_add=True)
-    update = models.DateField(auto_now=True)
-    
-    def __str__(self):
-        return self.company
-    
+ 
 class Descriptions(models.Model):
     STATES = ((None, '--Please choose--'),('New Brand', 'New Brand'),('Used', 'Used'), 
               ('Refurnished', 'Refurnished'),('Open Box', 'Open Box'),)
