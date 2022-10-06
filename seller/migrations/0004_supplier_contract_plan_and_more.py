@@ -18,6 +18,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='supplier',
             name='date_of_expiration',
-            field=models.DateField(blank=True, null=True, verbose_name='contract expiration date'),
+            field=models.DateField(verbose_name='contract expiration date'),
         ),
     ]

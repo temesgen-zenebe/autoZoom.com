@@ -1,0 +1,14 @@
+{% extends "_base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}supplier profile management{% endblock %}
+{% block main %}
+  <h2 class="text-center">supplier profile form</h2>
+  <div class="card border-primary m-auto mb-3 p-3" style="max-width: 50rem">
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {{ form|crispy}}
+      <button class="form-control btn btn-success">submit</button>
+    </form>
+  </div>
+{% endblock %}

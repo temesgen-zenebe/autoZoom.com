@@ -1,5 +1,6 @@
 {% extends "_base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
 {% block javascript %}
    <script type="text/javascript" src="{% static 'js/main.js' %}" defer ></script>
 {% endblock %}
@@ -40,6 +41,9 @@
                     <div class="col-12 col-sm-12 px-2 py-1" id="nav-list-order-tab" data-bs-toggle="tab" data-bs-target="#nav-list-order" type="button" role="tab" aria-controls="nav-list-order" aria-selected="false"><i class="bi bi-plus-square mx-2"></i>List product</div>
                     <div class="col-12 col-sm-12 px-2 py-1" id="nav-previous-order-tab" data-bs-toggle="tab" data-bs-target="#nav-previous-order" type="button" role="tab" aria-controls="nav-previous-order" aria-selected="false"><i class="bi bi-plus-square mx-2"></i> sell product</div>
                     <div class="col-12 col-sm-12 px-2 py-1" id="nav-delete-order-tab" data-bs-toggle="tab" data-bs-target="#nav-delete-order" type="button" role="tab" aria-controls="nav-delete-order" aria-selected="false"><i class="bi bi-plus-square mx-2"></i>purchsded product</div>
+                    <div class="fw-bold my-2 ">seller management</div>
+                    <div class="col-12 col-sm-12 px-2 py-1" id="nav-seller-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-seller-profile" type="button" role="tab" aria-controls="nav-seller-profile" aria-selected="false"><i class="bi bi-plus-square mx-2"></i>Profile management</div>
+                    
                 </div>
               </div>
             </div>
@@ -51,7 +55,7 @@
                 <div class="mx-2 my-3">
                     Some text as placeholder. In real life you can have the elements you
                     have chosen. Like, text, images, lists, etc.
-                  {% comment "" %}{% include "products/product_list.html" %}{% endcomment %}  
+                  
                 </div>
             </div>
             <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0"> 
@@ -78,6 +82,10 @@
             </div>
             <div class="tab-pane fade" id="nav-delete-order" role="tabpanel" aria-labelledby="nav-delete-order-tab" tabindex="0">
                 delete-order
+            </div>
+            <div class="tab-pane fade" id="nav-seller-profile" role="tabpanel" aria-labelledby="nav-seller-profile-tab" tabindex="0">
+               nav-seller-profile
+              
             </div>
         </div>
       <!-- End Example Code -->

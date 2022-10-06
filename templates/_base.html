@@ -73,30 +73,18 @@
                         <li class="nav-item"><a class="nav-link" href="{% url 'account_login'%}">Log in</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'account_signup'%}">Sign up</a></li>
                         {% else %} 
-                        <li class="nav-item"><a class="nav-link"href="{% url 'pages:dashboard' %}">My dashbord</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {% if user.avatar and not form.avatar.errors %}
+                        <li class="nav-item" >
+                            <a class="nav-link" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+                            
+                            {% if user.avatar and not form.avatar.errors %}
                                
                                 <img src="{{ user.avatar.url }}" alt="Avatar"
                                     class="img-fluid rounded-circle shadow m-auto" style="width:30px;"/>
                                 
                                 {% endif %} {{user.last_name }}
-                            </a> 
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
-                               <a class="dropdown-item" href="{% url 'my-account' %}">Manage account</a>
-                                <a class="dropdown-item" href="{% url 'pages:dashboard' %}">My dashbord</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Your Scores</a>
-                                <a class="dropdown-item" href="#"></a>
-                                <form method="post" action="{% url 'account_logout' %}">
-                                    {% csrf_token %}
-                                    <button class="btn dropdown-item">Log out</button>
-                                </form> 
-                            </div>
+                             dashbord
+                            </a>
                         </li>
-                        
                         
                         <li class="nav-item">
                             <li class="nav-item text-white"><a class="nav-link  text-white" href="/admin/">Admin</a></li>
@@ -129,7 +117,9 @@
             
             <!--main block-->
             {% block main %}{% endblock %}
-        </div>
+            <!--seller dashboard block-->
+            {% include "seller/dashboard.html" %}
+  
     </main>
     <!-- footer -->
     <footer>

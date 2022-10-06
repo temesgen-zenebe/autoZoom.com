@@ -1,0 +1,29 @@
+{% extends "_base.html" %}
+
+{% block title %}Supplier profile{% endblock %}
+{% block main %}
+  <div class="card border-primary m-auto mb-3 text-center"
+    style="max-width: 30rem">
+    <div class="card-header">{{ supplier.company }}</div>
+    <div class="card-body text-primary">
+      <h5 class="card-title">{{ supplier.email }}</h5>
+    </div>
+    <div class="card-footer">
+      <div class="border-bottom border-faded pb-2">
+        <strong>supplier Location:</strong> {{ supplier.supplier_location.city }}<br>
+      </div>
+      {% if supplier.user == user %}
+        <div class="border-bottom border-faded m-2 pb-2">
+          <a href="{% url 'seller:update' supplier.slug %}"
+            class="btn btn-info btn-sm mr-2">Update</a>
+          <a href="{% url 'seller:delete' supplier.slug %}"
+            class="btn btn-danger btn-sm mr-2">Delete</a>
+        </div>
+      {% endif %}
+      <small class="text-muted">
+        Created on: {{ joke.created }} by {{ joke.user.username }}<br>
+        Last updated: {{ joke.updated }}
+      </small>
+    </div>
+  </div>
+{% endblock %}

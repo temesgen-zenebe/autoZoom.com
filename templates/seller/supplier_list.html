@@ -1,0 +1,44 @@
+{% extends "_base.html" %}
+
+{% block title %}seller profile{% endblock %}
+{% block main %}
+ 
+ {% if not data %}
+ 
+  <a class="btn btn-success btn-sm float-right" href="{% url 'seller:create' %}">
+    + New Joke {{data}}
+  </a>
+
+  
+  {% endif %}
+  <h2>profile</h2>
+  <div class="table-responsive">
+    <table class="table table-striped" style="min-width: 500px">
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Email</th>
+          <th>Contact</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for supplier in supplier_list %}
+         {% if request.user == supplier.user %}
+          <tr>
+            <td>
+              <a href="{{supplier.get_absolute_url}}">{{supplier.company}}</a>
+            </td>
+            <td>
+              {{ supplier.email }}<br>
+            </td>
+            <td>
+              <a href="{% url 'seller:update' supplier.slug %}"><i class="fas fa-pencil-alt"></i></a>
+              <a href="{% url 'seller:delete' supplier.slug %}"><i class="far fa-trash-alt"></i></a>
+            </td>
+          </tr>
+          {% endif %}
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
