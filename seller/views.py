@@ -24,18 +24,19 @@ class SupplierDeleteView(DeleteView):
     def test_func(self):
         obj = self.get_object()
         return self.request.user == obj.user
-
-
-class SupplierDetailView(DetailView):
-    model = Supplier
     
 class SupplierUpdateView(UserPassesTestMixin, UpdateView):
     model = Supplier
     form_class = SupplierProfileForm
-
+    
     def test_func(self):
         obj = self.get_object()
         return self.request.user == obj.user
+
+class SupplierDetailView(DetailView):
+    model = Supplier
+    
+
     
 class SupplierListView(ListView):
     model = Supplier
@@ -46,6 +47,6 @@ class SupplierProfileConfirmationThanksView(TemplateView):
 class SellerDashboardView(TemplateView):
     template_name = 'seller/dashboard.html'
     
-def supplier_detail(request, slug, id):
-    supplier=get_object_or_404(Supplier, pk=id, slug=slug) 
-    return render(request,'supplier_list.html',{'data': supplier})
+def supplier_detail(request, slug):
+    supplier=get_object_or_404(Supplier, slug=slug) 
+    return render(request,'pages/dashboard.html',{'supplier': supplier})
