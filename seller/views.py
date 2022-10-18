@@ -9,7 +9,7 @@ from .forms import SupplierProfileForm
 class SupplierCreateView(LoginRequiredMixin,CreateView):
     model = Supplier
     form_class = SupplierProfileForm 
-    success_url = reverse_lazy('seller:profile_confirmation')
+    success_url = reverse_lazy('seller:list')
     
     def form_valid(self, form):
         form.instance.user = self.request.user

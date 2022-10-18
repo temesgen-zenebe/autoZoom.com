@@ -2,18 +2,17 @@
 
 {% block title %}seller profile{% endblock %}
 {% block main %}
-
-  {% for supplier in supplier_list %}
-  {% if supplier.user == request.user%}
-  {% else %}
-    {% if request.user.is_authenticated %}
-    
-      <a class="btn btn-success btn-sm float-right" href="{% url 'seller:create' %}">
-        + New Joke 
-      </a>
-      {% endif %}
+ {% if request.user.is_authenticated %}
+  {% if supplier_list %}
+      {% for supplier in supplier_list %}
+        {% if supplier.user == request.user%}
+          <a class="btn btn-success btn-sm float-right" href="{% url 'seller:update' supplier.slug %}"> update supplier </a> 
+        {% else %}
+          <a class="btn btn-success btn-sm float-right" href="{% url 'seller:create' %}"> + New supplier </a> 
+        {% endif %}
+      {% endfor %}
+    {% endif %}
   {% endif %}
-  {% endfor %}
   <h2>profile</h2>
   <div class="table-responsive">
     <table class="table table-striped" style="min-width: 500px">

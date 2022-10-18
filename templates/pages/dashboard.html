@@ -20,9 +20,41 @@
         <div class="offcanvas-body">
           <div class="my-3 mx-3">
             <div class="row gap-2" id="" role="tablist">
-              <div class="col-12 col-sm-12 p-2 active rounded border-bottom shadow bg-primary  text-white">
-                <div class="ms-3 me-auto ">
+              <div class="col-12 col-sm-12 p-2 active rounded border-bottom    text-dark">
+                <div class="ms-1 me-auto ">
+                  <ul class="list-group list-group-flush">
+                    <div class="fw-bold list-group-item list-group-item-action ">Buyer Account</div>
+                    <a href="{% url 'my-account' %}" class="list-group-item list-group-item-action " aria-current="true">
+                      <i class="bi bi-person-square mx-2"></i>Update account
+                    </a>
+                    <form method="post" action="{% url 'account_logout' %}">
+                      {% csrf_token %}
+                      <button class=" btn btn-sm list-group-item list-group-item-action"><i class="bi bi-box-arrow-in-left mx-2"></i>Log out</button>
+                    </form> 
+                    <a href="#" class="list-group-item list-group-item-action"><i class="bi bi-plus-square mx-2"></i>Add profile</a>
+                    <a href="#" class="list-group-item list-group-item-action"><i class="bi bi-plus-square mx-2"></i>Update profile</a>
+                  </ul>
+                  <ul class="list-group list-group-flush">
+                    <div class="fw-bold list-group-item list-group-item-action ">Seller Account</div>
+                    <a href="{% url 'my-account' %}" class="list-group-item list-group-item-action " aria-current="true">
+                      <i class="bi bi-person-square mx-2"></i>Update account
+                    </a>
+                    <form method="post" action="{% url 'account_logout' %}">
+                      {% csrf_token %}
+                      <button class="btn btn-sm"><i class="bi bi-box-arrow-in-left mx-2"></i>Log out</button>
+                    </form> 
+                    <a href="#" class="list-group-item list-group-item-action"><i class="bi bi-person-lines-fill mx-2"></i>Add Profile</a>
+                    <a href="#" class="list-group-item list-group-item-action"><i class="bi bi-pencil-square mx-2"></i>Update Profile</a>
                     
+                  </ul>
+                  <ul class="list-group list-group-flush">
+                    <div class="fw-bold list-group-item list-group-item-action ">Manage Product</div>
+                    <a href="{% url 'my-account' %}" class="list-group-item list-group-item-action " aria-current="true">
+                      <i class="bi bi-boxes mx-2"></i>Add Product
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action"><i class="bi bi-pencil-square mx-2"></i>Update Profile</a>
+                    
+                  </ul>
                     <div class="fw-bold my-2 ">Manage product</div>
                     <div class="col-12 col-sm-12 px-2 py-1 active " id="nav-home-tab"><i class="bi bi-plus-square mx-2"></i> Add product</div>
                     <div class="col-12 col-sm-12 px-2 py-1" id="nav-profile-tab" ><i class="bi bi-plus-square mx-2"></i>order product</div>

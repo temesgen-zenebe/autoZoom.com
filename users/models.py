@@ -24,7 +24,6 @@ class CustomUser(AbstractUser):
         blank=True,
         help_text='Image must be 200px by 200px.',
         validators=[validate_avatar],
-       
     )
     
     def get_absolute_url(self):

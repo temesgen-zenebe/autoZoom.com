@@ -36,11 +36,11 @@
 </head>
 
 <body>
-    
+    <div class="sticky-top">
     <!-- header -->
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary p-3">
-            <div class="container-fluid mx-3">
+            <div class="container-fluid mx-3 ">
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -55,6 +55,18 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link " href="{% url 'pages:about-us' %}">About</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Seller
+                            </a>
+                            
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{% url 'products:product-list' %}">Be Seller</a>
+                                <a class="dropdown-item" href="#">Search Seller</a>
+                            </div>
+                            
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -149,7 +161,7 @@
                 </div>
                 
                 <div class="row my-2 mx-auto px-2" >
-                    <div class="col-12 col-sm-6 text-white bg-primary">
+                    <div class="col-12 col-sm-6 text-white bg-primary mx-auto">
                         <div class="card text-white bg-primary border-0">
                             <div class="card-body">
                                 <p class="font-tickers">We’ll never share your email address with a third-party.<p>
@@ -162,7 +174,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-sm-6 text-white bg-primary">
+                    <hr>
+                    <div class="col-12 col-sm-12 text-white bg-primary">
                         <div class="card text-white bg-primary border-0">
                             <div class="card-body px-2">
                                 <p class="font-tickers text-center">Connact with us via<p>
@@ -290,7 +303,7 @@
     {% comment %} <script type="text/javascript"  src="{% static 'js/formValidation.js' %}" async></script> {% endcomment %}
     
     
-  
+</div>
 </body>
 
 </html>
