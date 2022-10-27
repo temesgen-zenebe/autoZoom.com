@@ -25,13 +25,9 @@ class CustomUser(AbstractUser):
         help_text='Image must be 200px by 200px.',
         validators=[validate_avatar],
     )
-    is_seller = models.BooleanField('Is seller', default=False)
     
     def get_absolute_url(self):
         return reverse('my-account')
-    
-    def get_absolute_url(self):
-        return reverse('seller-account')
 
     def __str__(self):
         return f'{self.username}'
