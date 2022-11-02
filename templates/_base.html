@@ -7,17 +7,20 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <script src="https://kit.fontawesome.com/e4ab79068e.js" crossorigin="anonymous"></script>
-    
+
+     <!-- Top Sell Bootstrap5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
     <!-- Top Sell Bootstrap CSS -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap" rel="stylesheet">
 
-    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-
+    
     <!-- Bootstrap CSS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     
@@ -26,6 +29,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <link rel="stylesheet" href="{% static 'css/topsell.css' %}">
@@ -36,274 +41,278 @@
 </head>
 
 <body>
-    <div class="sticky-top">
-    <!-- header -->
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary p-3">
-            <div class="container-fluid mx-3 ">
-                <button class="navbar-toggler" type="button" data-toggle="collapse"
-                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+    <div class="">
+        <!-- header -->
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary p-3">
+                <div class="container-fluid mx-3 ">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="{% url 'pages:homepage' %}">Home <span
-                                    class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link " href="{% url 'pages:about-us' %}">About</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Seller
-                            </a>
-                            
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{% url 'products:product-list' %}">Be Seller</a>
-                                <a class="dropdown-item" href="#">Search Seller</a>
-                            </div>
-                            
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Products
-                            </a>
-                            
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{% url 'products:product-list' %}">Products Catalog</a>
-                                <a class="dropdown-item" href="#">Services Catalog</a>
-                            </div>
-                            
-                        </li>
-                       
-                        {% if not user.is_authenticated %}
-                        <li class="nav-item"><a class="nav-link" href="{% url 'account_login'%}">Log in</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'account_signup'%}">Sign up</a></li>
-                        {% else %} 
-                        <li class="nav-item" >
-                            <a class="nav-link" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-                            
-                            {% if user.avatar and not form.avatar.errors %}
-                               
-                                <img src="{{ user.avatar.url }}" alt="Avatar"
-                                    class="img-fluid rounded-circle shadow m-auto" style="width:30px;"/>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="{% url 'pages:homepage' %}">Home <span
+                                        class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href="{% url 'pages:about-us' %}">About</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Seller
+                                </a>
                                 
-                                {% endif %} {{user.last_name }}
-                             dashbord
-                            </a>
-                        </li>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{% url 'products:product-list' %}">Be Seller</a>
+                                    <a class="dropdown-item" href="#">Search Seller</a>
+                                </div>
+                                
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Products
+                                </a>
+                                
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{% url 'products:product-list' %}">Products Catalog</a>
+                                    <a class="dropdown-item" href="#">Services Catalog</a>
+                                </div>
+                                
+                            </li>
                         
-                        <li class="nav-item">
-                            <li class="nav-item text-white"><a class="nav-link  text-white" href="/admin/">Admin</a></li>
-                        </li>
-                        {% endif %}
-                    </ul>
-                </div>
-                <a class="navbar-brand " href="{% url 'pages:homepage' %}">
-                    <i class="bi bi-disc mx-2"></i>autoZoom</a>
-            </div>
-        </nav>
-    </header>
-    <!-- main -->
-    <main>
-        <div class="container-fluid my-4">
-               <!--subscribe massage confeiramtion -->
-            <!--<div class="container  my-5 ">
-              {% if messages %}
-              <div class="alert alert-success alert-dismissible fade show text-center  " role="alert" data-bs-delay="3000">
-               
-               <ul class="list-group list-group-horizontal-xxl text-start p-2 ">    
-                 {% for message in messages %} 
-                   <li{% if message.tags %} class="{{ message.tags }}  list-group-item  alert-success"{% endif %}><i class="bi bi-check2-square px-2"></i> {{ message }}</li>
-                 {% endfor %}
-                 </ul>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-               </div>
-               {% endif %}
-            </div > -->
-            
-            <!--main block-->
-            {% block main %}{% endblock %}
-            <!--seller dashboard block-->
-            {% include "pages/dashboard.html" %}
-  
-    </main>
-    <!-- footer -->
-    <footer>
-        <div class="container-fluid m-auto p-3 rounded" style="max-width: 99%;">
-            <footer class="bg-primary text-center text-white">
-                <!-- Grid container -->
-                <div class=" text-white">
-                    <ul class="nav justify-content-center">
-
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="{% url 'pages:homepage' %}">Home</a>
-                        </li>
-                        
-                        
-                        <li class="nav-item">
-                            <a href="#" type="button" class="nav-link text-white">
-                                comments
-                            </a>
+                            {% if not user.is_authenticated %}
+                            <li class="nav-item"><a class="nav-link" href="{% url 'account_login'%}">Log in</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'account_signup'%}">Sign up</a></li>
+                            {% else %} 
+                            <li class="nav-item" >
+                                <a class="nav-link" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+                                
+                                {% if user.avatar and not form.avatar.errors %}
+                                
+                                    <img src="{{ user.avatar.url }}" alt="Avatar"
+                                        class="img-fluid rounded-circle shadow m-auto" style="width:30px;"/>
+                                    
+                                    {% endif %} {{user.last_name }}
+                                dashbord
+                                </a>
+                            </li>
                             
-                        </li>
-                        
-                        <li class="nav-item">
-                          <a class="nav-link  text-white" href="{% url 'pages:contact-us' %}">Contact</a>
-                        </li>
-                    </ul>
-                    <hr>
+                            <li class="nav-item">
+                                <li class="nav-item text-white"><a class="nav-link  text-white" href="/admin/">Admin</a></li>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    <a class="navbar-brand " href="{% url 'pages:homepage' %}">
+                        <i class="bi bi-disc mx-2"></i>autoZoom</a>
                 </div>
+            </nav>
+        </header>
+        <!-- main -->
+        <main>
+            <div class="container-fluid my-4">
                 
-                <div class="row my-2 mx-auto px-2" >
-                    <div class="col-12 col-sm-6 text-white bg-primary mx-auto">
-                        <div class="card text-white bg-primary border-0">
-                            <div class="card-body">
-                                <p class="font-tickers">We’ll never share your email address with a third-party.<p>
-                                <div class="input-group input-group-sm">
-                                    <input type="text" id="" name="" class="form-control" placeholder="Your email address" />
-                                    <div class="input-group-append">
-                                        <button class="btn btn-sm btn-outline-light" type="button">Subscribe</button>
+                <!--subscribe massage confeiramtion -->
+                <!--<div class="container  my-5 ">
+                {% if messages %}
+                <div class="alert alert-success alert-dismissible fade show text-center  " role="alert" data-bs-delay="3000">
+                
+                <ul class="list-group list-group-horizontal-xxl text-start p-2 ">    
+                    {% for message in messages %} 
+                    <li{% if message.tags %} class="{{ message.tags }}  list-group-item  alert-success"{% endif %}><i class="bi bi-check2-square px-2"></i> {{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endif %}
+                </div > -->
+                
+                <!--main block-->
+                {% block main %}{% endblock %}
+                <!--seller dashboard block-->
+                {% include "pages/dashboard.html" %}
+    
+        </main>
+        <!-- footer -->
+        <footer>
+            <div class="container-fluid m-auto p-3 rounded" style="max-width: 99%;">
+                <footer class="bg-primary text-center text-white">
+                    <!-- Grid container -->
+                    <div class=" text-white">
+                        <ul class="nav justify-content-center">
+
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="{% url 'pages:homepage' %}">Home</a>
+                            </li>
+                            
+                            
+                            <li class="nav-item">
+                                <a href="#" type="button" class="nav-link text-white">
+                                    comments
+                                </a>
+                                
+                            </li>
+                            
+                            <li class="nav-item">
+                            <a class="nav-link  text-white" href="{% url 'pages:contact-us' %}">Contact</a>
+                            </li>
+                        </ul>
+                        <hr>
+                    </div>
+                    
+                    <div class="row my-2 mx-auto px-2" >
+                        <div class="col-12 col-sm-6 text-white bg-primary mx-auto">
+                            <div class="card text-white bg-primary border-0">
+                                <div class="card-body">
+                                    <p class="font-tickers">We’ll never share your email address with a third-party.<p>
+                                    <div class="input-group input-group-sm">
+                                        <input type="text" id="" name="" class="form-control" placeholder="Your email address" />
+                                        <div class="input-group-append">
+                                            <button class="btn btn-sm btn-outline-light" type="button">Subscribe</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="col-12 col-sm-12 text-white bg-primary">
+                            <div class="card text-white bg-primary border-0">
+                                <div class="card-body px-2">
+                                    <p class="font-tickers text-center">Connact with us via<p>
+                                    <div class="gap-4 d-flex justify-content-center">
+                                        <a class="hover-target pe-5" href="https://www.facebook.com/temesgen.tshome"><i
+                                                class="bi bi-facebook text-white"></i></a>
+                                        <a class="hover-target pe-5" href="https://www.linkedin.com/in/temesgen-t-zenebe-9a7980183"><i
+                                                class="bi bi-linkedin text-white"></i></a>
+                                        <a class="hover-target pe-5" href="https://www.github.com/"><i
+                                                class="bi bi-github text-white"></i></a>
+                                        <a class="hover-target pe-5" href="https://www.pinterest.com/"><i
+                                                class="bi bi-pinterest text-white"></i></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!-- Copyright -->
                     <hr>
-                    <div class="col-12 col-sm-12 text-white bg-primary">
-                        <div class="card text-white bg-primary border-0">
-                            <div class="card-body px-2">
-                                <p class="font-tickers text-center">Connact with us via<p>
-                                <div class="gap-4 d-flex justify-content-center">
-                                    <a class="hover-target pe-5" href="https://www.facebook.com/temesgen.tshome"><i
-                                            class="bi bi-facebook text-white"></i></a>
-                                    <a class="hover-target pe-5" href="https://www.linkedin.com/in/temesgen-t-zenebe-9a7980183"><i
-                                            class="bi bi-linkedin text-white"></i></a>
-                                    <a class="hover-target pe-5" href="https://www.github.com/"><i
-                                            class="bi bi-github text-white"></i></a>
-                                    <a class="hover-target pe-5" href="https://www.pinterest.com/"><i
-                                            class="bi bi-pinterest text-white"></i></a>
+                    <div class="row my-2 mx-2 px-2 ">
+                        <div class="col-6 col-md-2 text-white bg-primary">
+                            <div class="card text-white bg-primary border-0">
+                                <div class="card-title text-start px-5 ">Corporate</div>
+                                <ul class="list-group text-start px-5  list-group-flush ">
+                                    <li class="list-group-item p-2 text-white bg-primary font-tickers">About Us</li>
+                                    <li class="list-group-item p-2 text-white bg-primary font-tickers">Company Profile</li>
+                                    <li class="list-group-item p-2 text-white bg-primary font-tickers">Blog</li>
+                                    <li class="list-group-item p-2 text-white bg-primary font-tickers">Site Maps</li>
+                                    <li class="list-group-item p-2 text-white bg-primary font-tickers">Contact Us</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-2 text-white bg-primary">
+                            <div class="card text-white bg-primary border-0">
+                                <div class="card-title text-start px-5 ">Services</div>
+                                <ul class="list-group text-start px-5  list-group-flush">
+                                    <li class="list-group-item p-2 text-white bg-primary font-tickers">Discounts</li>
+                                    <li class="list-group-item p-2 text-white bg-primary font-tickers">Campaigns</li>
+                                    <li class="list-group-item p-2 text-white bg-primary font-tickers">Brands</li>
+                                    <li class="list-group-item p-2 text-white bg-primary font-tickers">Gift Certificates</li>
+                                    <li class="list-group-item p-2 text-white bg-primary font-tickers">Returns</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-2 text-white bg-primary">
+                            <div class="card text-white bg-primary border-0">
+                                <div class="card-title text-start px-5 ">Account</div>
+                                <ul class="list-group text-start px-5  list-group-flush">
+                                    <li class="list-group-item p-2 text-white bg-primary font-tickers">Sign In</li>
+                                    <li class="list-group-item p-2 text-white bg-primary font-tickers">Sign up</li>
+                                    <li class="list-group-item p-2 text-white bg-primary font-tickers">My Account</li>
+                                    <li class="list-group-item p-2 text-white bg-primary font-tickers">Order History</li>
+                                    <li class="list-group-item p-2 text-white bg-primary font-tickers">Wish List</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-2 text-white bg-primary">
+                            <div class="card text-white bg-primary border-0">
+                                <div class="card-title text-start px-5 ">Support</div>
+                                <ul class="list-group text-start px-5  list-group-flush">
+                                    <li class="list-group-item p-2 text-white bg-primary font-tickers">FAQ</li>
+                                    <li class="list-group-item p-2 text-white bg-primary font-tickers">Ticket</li>
+                                    <li class="list-group-item p-2 text-white bg-primary font-tickers">Feedback</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4 text-center pt-2 text-white bg-primary">
+                            <div class="card text-white bg-primary border-0">
+                                <div class="card-title text-start px-5 ">Contact Us</div>
+                                <div class="text-start px-5 text-white bg-primary font-tickers">
+                                    <p >We are a team that create high quality </p>
+                                    <p class="m-0"><strong>Address</strong></p>
+                                    <p>Addis ababa,bola St, Ethiopia, autoZoom BUilding #401</p>
+                                    <p class="m-0"><strong>Need Help?</strong></p>
+                                    <p>Call: +251-911-456789</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- Copyright -->
-                <hr>
-                <div class="row my-2 mx-2 px-2 ">
-                    <div class="col-6 col-md-2 text-white bg-primary">
-                        <div class="card text-white bg-primary border-0">
-                            <div class="card-title text-start px-5 ">Corporate</div>
-                            <ul class="list-group text-start px-5  list-group-flush ">
-                                <li class="list-group-item p-2 text-white bg-primary font-tickers">About Us</li>
-                                <li class="list-group-item p-2 text-white bg-primary font-tickers">Company Profile</li>
-                                <li class="list-group-item p-2 text-white bg-primary font-tickers">Blog</li>
-                                <li class="list-group-item p-2 text-white bg-primary font-tickers">Site Maps</li>
-                                <li class="list-group-item p-2 text-white bg-primary font-tickers">Contact Us</li>
-                            </ul>
+                    <hr>
+                    <div class="d-flex justify-content-center bg-primary"
+                        style="background-color: rgba(0, 0, 0, 0.2); font-size: 13; color: rgb(217, 233, 217);">
+                        <div class="small font-tickers">
+                            <a class=" text-white " style="text-decoration: none;" href="{% url 'pages:terms-polices' %}">
+                                Terms & Conditions</a> | 
+                            <a class=" text-white " style="text-decoration: none;" href="{% url 'pages:terms-polices' %}">
+                                Privacy Policy</a> | 
+                            <a class=" text-white " style="text-decoration: none;" href="{% url 'pages:terms-polices' %}">
+                                Site Map</a>
                         </div>
                     </div>
-                    <div class="col-6 col-md-2 text-white bg-primary">
-                        <div class="card text-white bg-primary border-0">
-                            <div class="card-title text-start px-5 ">Services</div>
-                            <ul class="list-group text-start px-5  list-group-flush">
-                                <li class="list-group-item p-2 text-white bg-primary font-tickers">Discounts</li>
-                                <li class="list-group-item p-2 text-white bg-primary font-tickers">Campaigns</li>
-                                <li class="list-group-item p-2 text-white bg-primary font-tickers">Brands</li>
-                                <li class="list-group-item p-2 text-white bg-primary font-tickers">Gift Certificates</li>
-                                <li class="list-group-item p-2 text-white bg-primary font-tickers">Returns</li>
-                            </ul>
+                    <hr>
+                    <div class="justify-content-between bg-primary my-2 "
+                        style="background-color: rgba(0, 0, 0, 0.2); font-size: 12; color: rgb(217, 233, 217);">
+                        <div class="small font-tickers">
+                            <a class="text-white " style="text-decoration: none;" href="{% url 'pages:homepage' %}">
+                                copyright &copy; {% now 'Y' %} @autoZoom.com All Right Reserved.</a>
                         </div>
                     </div>
-                    <div class="col-6 col-md-2 text-white bg-primary">
-                        <div class="card text-white bg-primary border-0">
-                            <div class="card-title text-start px-5 ">Account</div>
-                            <ul class="list-group text-start px-5  list-group-flush">
-                                <li class="list-group-item p-2 text-white bg-primary font-tickers">Sign In</li>
-                                <li class="list-group-item p-2 text-white bg-primary font-tickers">Sign up</li>
-                                <li class="list-group-item p-2 text-white bg-primary font-tickers">My Account</li>
-                                <li class="list-group-item p-2 text-white bg-primary font-tickers">Order History</li>
-                                <li class="list-group-item p-2 text-white bg-primary font-tickers">Wish List</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-6 col-md-2 text-white bg-primary">
-                        <div class="card text-white bg-primary border-0">
-                            <div class="card-title text-start px-5 ">Support</div>
-                            <ul class="list-group text-start px-5  list-group-flush">
-                                <li class="list-group-item p-2 text-white bg-primary font-tickers">FAQ</li>
-                                <li class="list-group-item p-2 text-white bg-primary font-tickers">Ticket</li>
-                                <li class="list-group-item p-2 text-white bg-primary font-tickers">Feedback</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-4 text-center pt-2 text-white bg-primary">
-                        <div class="card text-white bg-primary border-0">
-                            <div class="card-title text-start px-5 ">Contact Us</div>
-                            <div class="text-start px-5 text-white bg-primary font-tickers">
-                                <p >We are a team that create high quality </p>
-                                <p class="m-0"><strong>Address</strong></p>
-                                <p>Addis ababa,bola St, Ethiopia, autoZoom BUilding #401</p>
-                                <p class="m-0"><strong>Need Help?</strong></p>
-                                <p>Call: +251-911-456789</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="d-flex justify-content-center bg-primary"
-                    style="background-color: rgba(0, 0, 0, 0.2); font-size: 13; color: rgb(217, 233, 217);">
-                    <div class="small font-tickers">
-                        <a class=" text-white " style="text-decoration: none;" href="{% url 'pages:terms-polices' %}">
-                            Terms & Conditions</a> | 
-                        <a class=" text-white " style="text-decoration: none;" href="{% url 'pages:terms-polices' %}">
-                            Privacy Policy</a> | 
-                        <a class=" text-white " style="text-decoration: none;" href="{% url 'pages:terms-polices' %}">
-                             Site Map</a>
-                    </div>
-                </div>
-                <hr>
-                <div class="justify-content-between bg-primary my-2 "
-                    style="background-color: rgba(0, 0, 0, 0.2); font-size: 12; color: rgb(217, 233, 217);">
-                    <div class="small font-tickers">
-                        <a class="text-white " style="text-decoration: none;" href="{% url 'pages:homepage' %}">
-                            copyright &copy; {% now 'Y' %} @autoZoom.com All Right Reserved.</a>
-                    </div>
-                </div>
-                <!-- Copyright -->
-            </footer>
+                    <!-- Copyright -->
+                </footer>
 
-        </div>
-    </footer>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.js" 
-    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 
-      crossorigin="anonymous"></script>
-      <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-   
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
-        integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
-        integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
-        crossorigin="anonymous"></script>
-    
-    {% comment %} <script type="text/javascript"  src="{% static 'js/formValidation.js' %}" async></script> {% endcomment %}
-    
-    
-</div>
+            </div>
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" 
+            integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" 
+            integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"
+            crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+            integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+            crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" 
+            crossorigin="anonymous"></script>
+        {% comment %} <script type="text/javascript"  src="{% static 'js/formValidation.js' %}" async></script> {% endcomment %}
+        
+        
+    </div>
 </body>
 
 </html>
