@@ -5,8 +5,8 @@
 {% endblock %}
 {% block title %} Product Detail {% endblock %}
 {% block main %}
-<div class="container  mt-4 shadow mx-auto rounded" style="max-width: 97%;">
-    <div class="row my-3">
+<div class="container  mt-4 mx-auto rounded" style="max-width: 97%;">
+    <div class="row shadow my-3">
 		<div class="col-md-12 ">
 			<div class="card border-0">
 				<div class="card-body">
@@ -120,7 +120,7 @@
 			</div>
 		</div> 
 	</div>
-    <div class="row mb-3">
+    <div class="row shadow mb-3">
         <div class="col-md-12">
 			<div class="card border-0">
 				<div class="card-body">
@@ -128,7 +128,7 @@
                        
                         <div class="col-12 col-md-12  py-3">
                              <nav class="">
-                                <div class="nav nav-tabs shadow mx-3" id="nav-tab" role="tablist">
+                                <div class="nav nav-tabs mx-3" id="nav-tab" role="tablist">
                                   <button class="nav-link active small-x" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Describtion</button>
                                   <button class="nav-link small-x" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Ratteing  & Reviews</button>
                                   
@@ -138,7 +138,7 @@
                               <div class="tab-content m-0 border-0 bd-example" id="nav-tabContent">
                                 <div class="tab-pane fade show m-0 active " id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
                                     
-                                    <table class="table shadow my-1">
+                                    <table class="table my-1">
                                         <tr >
                                           <th scope="row">Catagory</th>
                                           <td colspan="6" class="small-x">{{productDetail.product_name}}</td>
@@ -207,11 +207,6 @@
 		</div>
 	</div>
 </div>
-<!-- Button trigger modal 
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-    Launch static backdrop modal
-</button>
--->
 
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
