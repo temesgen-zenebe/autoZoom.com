@@ -96,7 +96,7 @@ class Supplier(models.Model):
         self.save()
     
     def __str__(self):
-        return '{} by {} TIN:{}'.format(self.company ,self.email,self.license_number)
+        return self.company
     
 
                                               

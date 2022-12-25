@@ -70,7 +70,7 @@
                     
                         <div class="col">
                             <a href="{% url 'products:product-detail' product.slug %}" class="text-decoration-none">
-                                <div class="card shadow h-100">
+                                <div class="card shadow h-100 px-1">
                                     
                                     <div class="d-flex justify-content-end">
                                         {% if product.tags == 'sell' and product.off_price_parentage %}
@@ -151,5 +151,5 @@
             </div>
         </div>
     </div>
-    
+
 {% endblock %}
