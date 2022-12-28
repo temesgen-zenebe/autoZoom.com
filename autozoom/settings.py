@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'buyer.apps.BuyerConfig',
     'seller.apps.SellerConfig',
+    'dashboard.apps.DashboardConfig',
     
 
 ]

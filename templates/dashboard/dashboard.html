@@ -1,0 +1,74 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block main %}
+
+      <div class="offcanvas offcanvas-start mx-3 " tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header">
+          <div class="mx-1 d-flex">
+            {% if user.avatar and not form.avatar.errors %}                
+            <div class="mx-2"> <img src="{{ user.avatar.url }}" alt="Avatar" class="img-fluid rounded-circle shadow m-auto " style="width:40px;"/></div>
+            <div class="mx-2"> <h6 > {{user.last_name }}</h6 ></div>
+            {% endif %} 
+            <div><h6 class="offcanvas-title mx-1" id="offcanvasExampleLabel">Dashboard</h6></div>
+          </div>
+          
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" ></button>
+        </div>
+        <div class="mx-auto"><p class="small muted ">You have access to manage the following</p></div>
+        <div class="offcanvas-body">
+          <div class="my-3 mx-3">
+            <div class="row gap-2" id="" role="tablist">
+              <div class="col-12 col-sm-12 p-2 active rounded text-dark">
+                <div class="ms-1 me-auto ">
+                 
+                 <!--
+                  <ul class="list-group list-group-flush">
+                    <div class="fw-bold list-group-item list-group-item-action ">Manage Product</div>
+                    <a href="{% url 'my-account' %}" class="list-group-item list-group-item-action " aria-current="true">
+                      <i class="bi bi-boxes mx-2"></i>Add Product
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action"><i class="bi bi-pencil-square mx-2"></i>Update Profile</a>
+                    
+                  </ul>-->
+                    <div class="fw-bold my-1 ">Seller</div>
+                    <div class="col-12 col-sm-12 px-1 py-1 active list-group list-group-flush " id="nav-home-tab"><a href="{% url 'dashboard:Manage-products'%}" class="list-group-item list-group-item-action"><i class="bi bi-stack mx-1"></i> Manage Product</a></div>
+                    <div class="col-12 col-sm-12 px-1 py-1 active list-group list-group-flush " id="nav-home-tab"><a href="#" class="list-group-item list-group-item-action"><i class="bi bi-basket-fill mx-1"></i> Manage Order</a></div>
+                    <div class="col-12 col-sm-12 px-1 py-1 active list-group list-group-flush " id="nav-home-tab"><a href="#" class="list-group-item list-group-item-action"><i class="bi bi-receipt mx-1"></i> Manage Sall</a></div>
+                    <div class="col-12 col-sm-12 px-1 py-1 active list-group list-group-flush " id="nav-home-tab"><a href="#" class="list-group-item list-group-item-action"><i class="bi bi-bag-fill mx-1"></i> Manage Purchsded</a></div>
+                    <div class="col-12 col-sm-12 px-1 py-1 active list-group list-group-flush " id="nav-home-tab"><a href="#" class="list-group-item list-group-item-action"><i class="bi bi-person-bounding-box mx-1"></i> Manage Account</a></div>
+         
+                    <hr>
+                    <div class="fw-bold my-2 ">Buyer</div>
+                    <div class="col-12 col-sm-12 px-1 py-1 active list-group list-group-flush " id="nav-home-tab"><a href="#" class="list-group-item list-group-item-action"><i class="bi bi-pencil-square "></i> Manage Order</a></div>
+                    <div class="col-12 col-sm-12 px-1 py-1 active list-group list-group-flush " id="nav-home-tab"><a href="#" class="list-group-item list-group-item-action"><i class="bi bi-pencil-square "></i> Manage Benfits</a></div>
+                    <div class="col-12 col-sm-12 px-1 py-1 active list-group list-group-flush " id="nav-home-tab"><a href="#" class="list-group-item list-group-item-action"><i class="bi bi-pencil-square "></i> Manage Returns</a></div>
+                    <div class="col-12 col-sm-12 px-1 py-1 active list-group list-group-flush " id="nav-home-tab"><a href="#" class="list-group-item list-group-item-action"><i class="bi bi-pencil-square "></i> Manage Account</a></div>
+         
+                    <hr>
+                    <div class="fw-bold my-2 ">Admin</div>
+                    <div class="col-12 col-sm-12 px-1 py-1 active list-group list-group-flush " id="nav-home-tab"><a href="#" class="list-group-item list-group-item-action"><i class="bi bi-pencil-square "></i> Manage Product</a></div>
+                    <div class="col-12 col-sm-12 px-1 py-1 active list-group list-group-flush " id="nav-home-tab"><a href="#" class="list-group-item list-group-item-action"><i class="bi bi-pencil-square "></i> Manage Order</a></div>
+                    <div class="col-12 col-sm-12 px-1 py-1 active list-group list-group-flush " id="nav-home-tab"><a href="#" class="list-group-item list-group-item-action"><i class="bi bi-pencil-square "></i> Manage Sell</a></div>
+                    <div class="col-12 col-sm-12 px-1 py-1 active list-group list-group-flush " id="nav-home-tab"><a href="#" class="list-group-item list-group-item-action"><i class="bi bi-pencil-square "></i> Manage Purchsded</a></div>
+                    <div class="col-12 col-sm-12 px-1 py-1 active list-group list-group-flush " id="nav-home-tab"><a href="#" class="list-group-item list-group-item-action"><i class="bi bi-pencil-square "></i> Manage Account</a></div>
+                    <!--
+                    <div class="col-12 col-sm-12 px-2 py-1"><a href="{% url 'seller:list'%}" class="text-dark text-decoration-none" id="nav-seller-profile-tab"><i class="fas fa-pencil-alt mx-2"></i>Update profile</a></div>
+                    <div class="col-12 col-sm-12 px-2 py-1"><a href="{% url 'seller:list' %} " class="text-dark text-decoration-none" id="nav-seller-profile-tab"><i class="bi bi-geo-alt mx-2"></i>Update Location</a></div>
+                    -->
+                    <hr>
+                    <div class="fw-bold my-1 ">
+                      <form method="post" action="{% url 'account_logout' %}">
+                        {% csrf_token %}
+                        <div class="fw-bold my-1  col-12 col-sm-12 px-2 py-1"><button class="btn btn-sm dropdown-item text-dark"><i class="bi bi-box-arrow-in-left mx-2"></i>Log out</button></div>
+                      </form>
+                    </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+     
+
+{% endblock %}

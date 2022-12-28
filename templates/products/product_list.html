@@ -25,9 +25,9 @@
                           
                           <div class="row my-3">
                             <div class="col-12 col-sm-12 ">
-                              
-                                <form class="d-flex" role="search">
-                                  <input class="form-control form-control-sm me-2" type="search" placeholder="Search" aria-label="Search">
+                                <form class="d-flex" role="search" action="{% url 'products:product-list' %}">
+                                  <input class="form-control form-control-sm me-2" type="search" placeholder="Search" aria-label="Search"
+                                  name="q" value="{{ request.GET.q }}">
                                   <button class="btn btn-sm btn-outline-success" type="submit">Search</button>
                                 </form>
                               

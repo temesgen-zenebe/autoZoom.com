@@ -95,6 +95,9 @@ class PictureAdmin(admin.ModelAdmin):
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     model = Product
+    
+    search_fields = ['part_number', 'product_name','category']
+    
     list_display = [
         'product_name' ,
         'part_number', 
@@ -115,6 +118,8 @@ class ProductAdmin(admin.ModelAdmin):
         'created',
         'update', 
     ]
+    
+    
     def get_readonly_fields(self, request, obj=None):
         if obj: # editing an existing object
             return ('slug','created','update')

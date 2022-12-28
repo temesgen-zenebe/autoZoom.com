@@ -35,9 +35,7 @@ class SupplierUpdateView(UserPassesTestMixin, UpdateView):
 
 class SupplierDetailView(DetailView):
     model = Supplier
-    
-
-    
+      
 class SupplierListView(ListView):
     model = Supplier
     
