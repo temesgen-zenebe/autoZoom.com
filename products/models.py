@@ -79,7 +79,6 @@ class Product_location(models.Model):
     
 class Stock_info(models.Model): 
     quantity = models.IntegerField(default=1)
-    Supplier = models.ForeignKey(Supplier ,on_delete=models.PROTECT , blank=True ,null=True )
     product_location = models.ForeignKey(Product_location ,on_delete=models.CASCADE , blank=True ,null=True )
     slug = models.SlugField(max_length=50, unique=True, null=False, editable=False)
     created = models.DateField(auto_now_add=True)
@@ -127,6 +126,7 @@ class Product(models.Model):
     shipping = models.CharField(max_length=30, choices=SHIPPING ,blank=True, null=True)
     category = models.ForeignKey(Category ,on_delete=models.CASCADE, blank=True,null=True )
     stock_info = models.ForeignKey(Stock_info ,on_delete=models.CASCADE, blank=True,null=True )
+    supplier = models.ForeignKey(Supplier ,on_delete=models.PROTECT , blank=True ,null=True )
     label = models.CharField(max_length=30, choices=LABEL)
     return_police = models.CharField(max_length=30, choices=RETURN_POLICE) 
     created = models.DateField(auto_now_add=True)

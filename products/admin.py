@@ -74,7 +74,7 @@ class Product_locationAdmin(admin.ModelAdmin):
 @admin.register(Stock_info)
 class Stock_infoAdmin(admin.ModelAdmin):
     model = Stock_info
-    list_display = ['quantity','Supplier','product_location','slug','created','update',]
+    list_display = ['quantity','product_location','slug','created','update',]
     
     def get_readonly_fields(self, request, obj=None):
         if obj: # editing an existing object
@@ -112,6 +112,7 @@ class ProductAdmin(admin.ModelAdmin):
         'available' ,
         'category',
         'stock_info', 
+        'supplier',
         'label',
         'return_police',
         'slug',
