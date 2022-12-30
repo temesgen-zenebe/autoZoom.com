@@ -27,3 +27,16 @@ class ProductInfoView(View):
     
     def post(self, request):
         pass
+    
+    
+def search(request):        
+    if request.method == 'GET': # this will be GET now      
+        search_product =  request.GET.get('search') # do some research what it does       
+        try:
+            product = Product.objects.filter(Q(part_number__icontains=search_product)) # filter returns a list so you might consider skip except part
+            return render(request,"dashboard/manageProduct.html",{"product":product})
+        except:
+            return render(request,"dashboard/manageProduct.html",{'product':product})
+    else:
+        return render(request,"dashboard/manageProduct.html",{})
+    
