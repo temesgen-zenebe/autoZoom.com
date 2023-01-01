@@ -1,0 +1,112 @@
+{% extends "_base.html" %}
+{% load static %}
+{% block javascript %}
+   <script type="text/javascript" src="{% static 'js/main.js' %}" defer ></script>
+{% endblock %}
+{% block title %} Product Searching {% endblock %}
+{% block main %}
+    
+    <div class="container my-3 mx-auto rounded" style="max-width: 98%;">
+        <div class="row gap-0 justify-content-center">
+            <div class="col-12 col-sm-12 mb-3">
+              <div class="card mx-auto border-0">
+                <div class="card-body ">
+                  <div class="row gap-0 justify-content-center">
+                    <div class="col-12 col-sm-3 my-1"> 
+                      <div class="card shadow ">
+                        <div class="card-body">
+                          <img src="{% static 'images/skf-hero2.png' %}"  style="max-width:100%;hight:100px;" class="rounded mx-auto d-block" alt="...">
+                        </div>
+                      </div>
+                    </div>
+                    <div class=" col-12 col-sm-9">
+                      <div class="card shadow">
+                        <div class="card-body">
+                          
+                          <div class="row my-2">
+                            <div class="col-12 col-sm-12 ">
+                                <div class="input-group input-group-sm mb-3">
+                                    
+                                    <select class="form-select" id="inputGroupSelect031" aria-label="Example select with button addon" fdprocessedid="vsoqj5">
+                                        {% for search_product in object_list %} 
+                                          <option value="" selected disabled>Choose catagory...</option>
+                                          <option value="{{ search_product.category}}">{{ search_product.category}}</option>
+                                          
+                                        {% endfor %}
+                                        </select>
+                                    <select class="form-select" id="inputGroupSelect032" aria-label="Example select with button addon" fdprocessedid="vsoqj5">
+                                    {% for search_product in object_list %} 
+                                      <option value="" selected disabled>Choose subcatagory...</option>
+                                      <option value="{{ search_product.category.sub_category }}">{{ search_product.category.sub_category}}</option>
+                                      
+                                    {% endfor %}
+                                    </select>
+                                  </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-4 col-sm-4" >
+                                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                {% for search_product in object_list %} 
+                                  <option value="" selected disabled>Brand</option>
+                                  <option value="{{search_product.brand}}">{{search_product.brand}}</option>
+                                  
+                                {% endfor %}
+                                </select>
+                              </div>
+                              <div class="col-4 col-sm-4" >
+                                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                  <option value=""  selected disabled>Tage</option>
+                                  {% for search_product in object_list %} 
+                                    <option value="{{search_product.tags}}">{{search_product.tags}}</option>
+                                  {% endfor %}
+                                </select>
+                              </div>
+                              <div class="col-4 col-sm-4">
+                                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                  <option value="" selected disabled>madin</option>
+                                  {% for search_product in object_list %} 
+                                    <option value="{{search_product.brand.made_in}}">{{search_product.brand.made_in}}</option>
+                                  {% endfor %}
+                                </select>
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-12 ">
+              <div class="card mx-auto border-0">
+                <div class="card-header bg-white ">
+                  Searching Result : {{object_list|length}}
+                </div>
+                <div class="card-body">
+                  <div class="row row-cols-1 row-cols-md-5 g-4">
+                    {% if object_list %}
+                      <ul>
+                        {% for search_product in object_list %} 
+                        
+                            <li>
+                              {{ search_product.part_number }}, {{ search_product.product_name}}
+                            </li>
+                        {% endfor %}
+                      </ul>
+                    {% else %}
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>oppss (0) result!!</strong> we don't have this product or seravice sory.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+           
+        </div>
+    </div>
+
+{% endblock %}

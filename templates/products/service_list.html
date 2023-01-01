@@ -1,0 +1,18 @@
+{% extends "_base.html" %}
+{% load static %}
+{% block javascript %}
+   <script type="text/javascript" src="{% static 'js/main.js' %}" defer ></script>
+{% endblock %}
+{% block title %} Services Listing{% endblock %}
+{% block main %}
+    
+    <div class="container my-3 mx-auto rounded" style="max-width: 98%;">
+        {% if searched_list %}
+            {% for service in searched_list %}
+                {{service.service_name}}
+            {% endfor %}      
+        {% endif %}
+
+    </div>
+
+{% endblock %}

@@ -185,9 +185,9 @@ class Service(models.Model):
         if not self.slug:
             value = str(self)
             self.slug = unique_slug(value, type(self))
-            
+        """ 
         if self.tags == 'sell':
-            self.off_price  = self.price - ((self.price * self.off_price_parentage)/100)
+            self.off_price  = self.price - ((self.price * self.off_price_parentage)/100)"""
             
         super().save(*args, **kwargs)
 

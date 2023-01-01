@@ -85,7 +85,7 @@
                                     
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="{% url 'products:product-list' %}">Products Catalog</a>
-                                        <a class="dropdown-item" href="#">Services Catalog</a>
+                                        <a class="dropdown-item" href="{% url 'products:service-list' %}">Services Catalog</a>
                                     </div>
                                     
                                 </li>
@@ -95,7 +95,7 @@
                                 <li class="nav-item"><a class="nav-link" href="{% url 'account_signup'%}">Sign up</a></li>
                                 {% else %} 
                                 
-                                <li class="nav-item d-none d-sm-block d-md-none">
+                                <li class="nav-item d-block d-sm-none">
                                 <div class="dropup-center">
                                     <a href="#" 
                                         class="d-block link-light text-decoration-none dropdown-toggle"
@@ -109,7 +109,8 @@
                                     </a>
                                     <ul class="dropdown-menu text-small">
                                         <li><a class="dropdown-item" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-                                            <i class="bi bi-speedometer2"></i> dashbord</a></li>
+                                            <i class="bi bi-speedometer2"></i> Dashboard</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'my-account' %}"><i class="bi bi-gear mr-1"></i>Account Setting</a></li>
                                         <li><hr class="dropdown-divider"></li>
                                         <li><div class="fw-bold ">
                                                 <form method="post" action="{% url 'account_logout' %}">
@@ -131,7 +132,7 @@
                         
                             </ul>
                             {% if user.is_authenticated %}
-                                <div class="dropup-center d-none d-lg-block  d-xl-block d-xxl-none">
+                                <div class="dropstart d-none d-lg-block  d-xl-block d-xxl-none">
                                     <a href="#" 
                                         class="d-block link-light text-decoration-none dropdown-toggle"
                                         data-bs-toggle="dropdown" 
@@ -144,7 +145,8 @@
                                     </a>
                                     <ul class="dropdown-menu text-small">
                                         <li><a class="dropdown-item" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-                                            <i class="bi bi-speedometer2"></i> dashbord</a></li>
+                                            <i class="bi bi-speedometer"></i> Dashboard</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'my-account' %}"><i class="bi bi-gear mr-1"></i>Account Setting</a></li>
                                         <li><hr class="dropdown-divider"></li>
                                         <li><div class="fw-bold ">
                                                 <form method="post" action="{% url 'account_logout' %}">
@@ -159,12 +161,19 @@
                                         </li>
                                     </ul>
                                 </div>
+                                
+                                <div class="mx-2"><button class="btn btn-sm btn-outline-light" type="submit" fdprocessedid="m5yb0o">Cart<i class="bi bi-cart4 mx-1"></i><span>1</span></button></div>
                             {% endif %}
-                            <form class="d-flex pl-4" role="search">
-                                <input class="form-control form-control-sm me-2" type="search" placeholder="Search" aria-label="Search">
-                                <button class="btn btn-sm btn-outline-light" type="submit" fdprocessedid="m5yb0o">Search</button>
-                            </form>
                             
+                            <!--<form action="{% url 'products:search_results' %}" method="get" class="d-flex pl-4" >
+                                <input name="q" type="text" class="form-control form-control-sm me-1 rounded-0" placeholder="Search" aria-label="Search">
+                                <button class="btn btn-sm btn-outline-light" type="submit" fdprocessedid="m5yb0o"><i class="bi bi-search"></i></button>
+                            </form>
+                            <form action="{% url 'products:search_results' %}" method="GET" class="d-flex pl-4" >
+                                <input name="q" type="text" class="form-control form-control-sm me-1 rounded-0" placeholder="Search" aria-label="Search">
+                                <button class="btn btn-sm btn-outline-light" type="submit" fdprocessedid="m5yb0o"><i class="bi bi-cart4"></i></button>
+                            </form>-->
+                           
                         </div>
                     </div>
                 </nav>

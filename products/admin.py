@@ -95,9 +95,7 @@ class PictureAdmin(admin.ModelAdmin):
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     model = Product
-    
     search_fields = ['part_number', 'product_name','category']
-    
     list_display = [
         'product_name' ,
         'part_number', 
