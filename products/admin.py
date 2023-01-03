@@ -130,7 +130,7 @@ class ServiceAdmin(admin.ModelAdmin):
     model = Service
     list_display = [
         'service_name' ,
-        'part_number', 
+        'service_number', 
         'brand',
         'description',
         'picture',

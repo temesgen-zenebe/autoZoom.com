@@ -47,7 +47,7 @@ class SearchResultsView(ListView):
                 
             if service_searched != '' and service_searched is not None:
                 searched_list =  Service.objects.filter(
-                    Q(service_name__icontains=service_searched) | Q(part_number__icontains=service_searched))
+                    Q(service_name__icontains=service_searched) | Q(service_number__icontains=service_searched))
                 
             context = {'object_list':searched_list,}
            

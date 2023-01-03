@@ -9,7 +9,7 @@
             <div class="col-md-12 ms-sm-auto col-lg-12 ">
                 <div class="row row-cols-1 row-cols-lg-2 ">
                     <div class="col my-2">
-                        <form  method="GET" action="{% url 'dashboard:search' %}" class="navbar navbar-dark sticky-top bg-primary flex-md-nowrap p-0 shadow" role="search" >
+                        <form  method="GET" action="" class="navbar navbar-dark sticky-top bg-primary flex-md-nowrap p-0 shadow" role="search" >
                             <a class="navbar-brand bg-primary col-md-3 col-lg-3 me-0 py-2 px-3 fs-6 d-none d-lg-block  d-xl-block d-xxl-none" href="#">{{user.first_name }}</a>
                             
                             <div class="input-group">
@@ -46,7 +46,7 @@
             </div>
         </div>
         <div class="card">
-            <div class="card-header bg-white"><p>Search Result<span>(0)</span></p></div>
+            <div class="card-header bg-white"><p>Search Result<span>({{product_list|length}})</span></p></div>
             <div class="card-body">
                 <div class="row">
                     <div class="table-responsive">
@@ -64,35 +64,7 @@
                                 <th scope="col">Action</th>
                                 </tr>
                             </thead>
-                            {% if  product %}
-                            <tbody>
-                                {% for product in product %}
-                                {% if  user == product.supplier.user%}
-                                <tr>
-                                <th scope="row"><div class="form-check"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1" /></div></th>
-                                <td>{{ product.product_name }}</td>
-                                <td>{{ product.part_number }}</td>
-                                <td>{{ product.brand}}</td>
-                                <td>{{ product.stock_info.quantity }}</td>
-                                <td>{{ product.available }}</td>
-                                <td>
-                                    <div class="btn-group btn-group-sm gap-1" role="group" aria-label="Small button group">
-                                        <button type="button" class="btn btn-outline-success " fdprocessedid="jmhj3"><i class="bi bi-pencil-square"></i></button>
-                                        <button type="button" class="btn btn-outline-danger" fdprocessedid="tu7aoc"><i class="bi bi-trash-fill"></i></button>
-                                    </div>
-                                </td>
-                                </tr>
-                                {% else %}
-                                
-                                    <div class="btn-group btn-group-sm gap-1" role="group" aria-label="Small button group">
-                                        oops you do not add any product to your store!! click to add products
-                                    </div>
-                                
-                                {% endif %}
-                                {% endfor %}
-                                
-                            </tbody>
-                            {% else %}
+                            {% if product_list %}
                             <tbody>
                                 {% for product in product_list %}
                                 {% if  user == product.supplier.user%}

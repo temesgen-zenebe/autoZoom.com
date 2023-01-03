@@ -162,7 +162,7 @@ class Product(models.Model):
     
 class Service(models.Model):
     service_name = models.CharField(max_length=100)
-    part_number = models.CharField(max_length=100)
+    service_number = models.CharField(max_length=100)
     brand = models.CharField(max_length=100)
     description = models.ForeignKey(Descriptions ,on_delete=models.CASCADE, blank=True,null=True )
     picture = models.ForeignKey(Picture ,on_delete=models.CASCADE, blank=True,null=True )

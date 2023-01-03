@@ -9,7 +9,7 @@ from django.views import View
 from django.db.models import Q
 from django.conf import settings
 # Create your views here.
-users = settings.AUTH_USER_MODEL 
+
 
 class DashboardView(TemplateView):
     template_name = 'dashboard/dashboard.html'
@@ -19,24 +19,24 @@ class ManageProduct(TemplateView):
     
 class ProductInfoView(View):
     def get(self, request): 
-        #seller = Supplier.objects.filter(Q(user = request.user) )
-        #product_list = Product.objects.filter(Q(current_user = product)).order_by('-created')
         product_list = Product.objects.all()
+        
         context = {'product_list':product_list}
-        return render(request , 'dashboard/manageProduct.html',context=context)
+        return render(request , 'dashboard/manageProduct.html',context)
     
     def post(self, request):
         pass
     
-    
-def search(request):        
-    if request.method == 'GET': # this will be GET now      
-        search_product =  request.GET.get('search') # do some research what it does       
-        try:
-            product = Product.objects.filter(Q(part_number__icontains=search_product)) # filter returns a list so you might consider skip except part
-            return render(request,"dashboard/manageProduct.html",{"product":product})
-        except:
-            return render(request,"dashboard/manageProduct.html",{'product':product})
-    else:
-        return render(request,"dashboard/manageProduct.html",{})
+
+""""
+    def search(request):        
+        if request.method == 'GET': # this will be GET now      
+            search_product =  request.GET.get('search') # do some research what it does       
+            try:
+                product = Product.objects.filter(Q(part_number__icontains=search_product)) # filter returns a list so you might consider skip except part
+                return render(request,"dashboard/manageProduct.html",{"product":product})
+            except:
+                return render(request,"dashboard/manageProduct.html",{'product':product})
+        else:
+            return render(request,"dashboard/manageProduct.html",{})"""
     

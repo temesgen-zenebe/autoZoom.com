@@ -45,13 +45,12 @@ class Supplier(models.Model):
               ('suspended', 'suspended'),)
     CONTRACT_PLAN = ((None, '--Please choose--'),('yearly', 'yearly'),('3years', '3years'), 
               ('5years', '5years'),)
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE, 
-        related_name='seller'
-    )
+    BUSINESS_TYPE = ((None, '--Please choose--'),('Product', 'product'),('service', 'service'),)
+    
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE, related_name='seller')
     company = models.CharField(max_length=100,blank=True ,null=True)
     contact_name = models.CharField(verbose_name="contact full Name", max_length=100,blank=True ,null=True)
+    business_type = models.CharField(verbose_name="business type", max_length=30, default="product", choices=BUSINESS_TYPE)
     phone = models.CharField(max_length=15,blank=True ,null=True)
     email = models.CharField(max_length=100,blank=True ,null=True,help_text='A valid email address.')
     website = models.URLField(blank=True,null=True , validators=[URLValidator(schemes=['http', 'https'])])
