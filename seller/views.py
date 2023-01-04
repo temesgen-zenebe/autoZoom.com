@@ -47,4 +47,6 @@ class SellerDashboardView(TemplateView):
     
 def supplier_detail(request, slug):
     supplier=get_object_or_404(Supplier, slug=slug) 
-    return render(request,'pages/dashboard.html',{'supplier': supplier})
+    context = {'supplier': supplier}
+    return render(request,'pages/dashboard.html',context)
+

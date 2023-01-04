@@ -105,7 +105,7 @@ class Picture(models.Model):
     def __str__(self):
         return str(self.picture)
     
-# Create your models here.
+
 class Product(models.Model):
     TAGS = ( (None, '--Please choose--'),('sell', 'sell'),('Hot', 'Hot'),('Fast moving', 'Fast moving'), )
     LABEL = ((None, '--Please choose--'),('Bast seller', 'Bast seller'), ('AutoZoom Choice', 'AutoZoom Choice'),('New', 'New'),)

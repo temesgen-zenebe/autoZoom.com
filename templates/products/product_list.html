@@ -1,4 +1,5 @@
 {% extends "_base.html" %}
+{% load crispy_forms_tags %}
 {% load static %}
 {% block javascript %}
    <script type="text/javascript" src="{% static 'js/main.js' %}" defer ></script>
@@ -7,6 +8,32 @@
 {% block main %}
     
     <div class="container my-3 mx-auto rounded" style="max-width: 98%;">
+
+        <!--model filtering-->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-scrollable ">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Advanced Filtering</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="card shadow">
+                  <div class="card-body">
+                    <div class="row mb-2">
+                      <div class="col-12 col-sm-12 m-2">
+                        <form method="GET">
+                          {{filter.form|crispy}}
+                          <button class="btn btn-sm btn-outline-primary w-100 " type="submit" fdprocessedid="m5yb0o"><i class="bi bi-funnel"></i> Filter</button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="row gap-0 justify-content-center">
             <div class="col-12 col-sm-12 mb-3">
               <div class="card mx-auto border-0">
@@ -22,70 +49,26 @@
                     <div class=" col-12 col-sm-9">
                       <div class="card shadow">
                         <div class="card-body">
-                          
                           <div class="row mb-2">
-                            <div class="col-12 col-sm-12 ">
-                              <form action="{% url 'products:product-list' %}" method="get" class="d-flex " >
-                                <input name="q" type="text" class="form-control form-control-sm me-1 " placeholder="Search" aria-label="Search">
-                                <button class="btn btn-sm btn-outline-secondary" type="submit" fdprocessedid="m5yb0o"><i class="bi bi-search"></i></button>
-                            </form>
+                            <div class="col-12 col-sm-12 d-flex">
+                              <div class="w-100">
+                                <form action="{% url 'products:product-list' %}" method="get" class="d-flex" >
+                                  <input name="q" type="text" class="form-control form-control-sm me-1 " placeholder="Search" aria-label="Search">
+                                  <button class="btn btn-sm btn-outline-primary" type="submit" fdprocessedid="m5yb0o"><i class="bi bi-search"></i></button>
+                                </form>
+                                 
+                              </div>
+                              <div class="mx-1">
+                                  <!-- Button trigger modal -->
+                                <button class="btn btn-sm btn-outline-primary " type="submit" fdprocessedid="m5yb0o" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-funnel mx-1"></i> Filter</button>
+                              </div>
                             </div>
                           </div>
-                          <div class="row my-1">
-                            <div class="col-4 col-sm-4" >
-                              <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                                <option selected>catagory...</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                              </select>
-                            </div>
-                            <div class="col-4 col-sm-4" >
-                              <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                                <option selected>subcatagory...</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                              </select>
-                            </div>
-                            <div class="col-4 col-sm-4">
-                              <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                                <option selected>madin</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                              </select>
-                            </div>
-                          </div>
-                          <div class="row">
-                              <div class="col-4 col-sm-4" >
-                                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                                  <option selected>Brand</option>
-                                  <option value="1">One</option>
-                                  <option value="2">Two</option>
-                                  <option value="3">Three</option>
-                                </select>
-                              </div>
-                              <div class="col-4 col-sm-4" >
-                                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                                  <option selected>Tage</option>
-                                  <option value="1">One</option>
-                                  <option value="2">Two</option>
-                                  <option value="3">Three</option>
-                                </select>
-                              </div>
-                              <div class="col-4 col-sm-4">
-                                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                                  <option selected>madin</option>
-                                  <option value="1">One</option>
-                                  <option value="2">Two</option>
-                                  <option value="3">Three</option>
-                                </select>
-                              </div>
-                          </div>
+                         
                         </div>
                       </div>
                     </div>
+                    
                   </div>
                 </div>
                 </div>
@@ -97,7 +80,7 @@
                 <div class="card-body">
                   <div class="row row-cols-1 row-cols-md-4 g-4">
                     {% if productList %}
-                      {% for product in productList %}
+                      {% for product in filter.qs %}
                       <div class="col">
                           <a href="{% url 'products:product-detail' product.slug %}" class="text-decoration-none">
                               <div class="card shadow h-100 px-1">
@@ -186,5 +169,5 @@
             </div>
         </div>
     </div>
-
+    
 {% endblock %}
