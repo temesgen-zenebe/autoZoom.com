@@ -39,6 +39,7 @@ class SupplierDetailView(DetailView):
 class SupplierListView(ListView):
     model = Supplier
     
+    
 class SupplierProfileConfirmationThanksView(TemplateView):
     template_name = 'seller/confirmation.html'
     

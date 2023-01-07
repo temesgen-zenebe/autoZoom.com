@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
+from django.urls import reverse_lazy
 from django.views.generic import TemplateView
 from seller.forms import SupplierProfileForm
 from seller.models import Supplier
@@ -8,7 +9,10 @@ from django.views.generic import (CreateView, DeleteView, DetailView, ListView, 
 from django.views import View
 from django.db.models import Q
 from django.conf import settings
+
 # Create your views here.
+
+from products.forms import ProductForm,PictureForm
 
 
 class DashboardView(TemplateView):
@@ -17,26 +21,37 @@ class DashboardView(TemplateView):
 class ManageProduct(TemplateView):
     template_name = 'dashboard/manageProduct.html'
     
-class ProductInfoView(View):
-    def get(self, request): 
-        product_list = Product.objects.all()
+    
+    
+
+class ProductInfoView(CreateView, LoginRequiredMixin):   
+    model = Product
+    paginate_by = 10
+    
+    def form_valid(self, form):
+            form.instance.user = self.request.user
+            return super().form_valid(form)
         
-        context = {'product_list':product_list}
+    def get(self, request): 
+        #users = self.request.user
+        form = ProductForm()
+        #forms = inlineformset_factory(Supplier, Product, form )
+        product_list = Product.objects.all()
+    
+        context = {'product_list':product_list,'form': form}
         return render(request , 'dashboard/manageProduct.html',context)
     
     def post(self, request):
-        pass
-    
+         if request.method == 'POST':
+            form = ProductForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('dashboard:product_info')
+            form = ProductForm()
+            context = {'form': form}
+            return render(request, 'dashboard/manageProduct.html', context)
+            
+        
 
-""""
-    def search(request):        
-        if request.method == 'GET': # this will be GET now      
-            search_product =  request.GET.get('search') # do some research what it does       
-            try:
-                product = Product.objects.filter(Q(part_number__icontains=search_product)) # filter returns a list so you might consider skip except part
-                return render(request,"dashboard/manageProduct.html",{"product":product})
-            except:
-                return render(request,"dashboard/manageProduct.html",{'product':product})
-        else:
-            return render(request,"dashboard/manageProduct.html",{})"""
     
+         

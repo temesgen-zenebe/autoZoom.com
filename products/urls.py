@@ -8,7 +8,7 @@ from .views import (
     ServiceDetailViews,
     SearchResultsView,)
 
-app_name = 'products' 
+app_name = 'products'
 urlpatterns = [
     
     path('product', ProductsListView.as_view(), name="product-list"),

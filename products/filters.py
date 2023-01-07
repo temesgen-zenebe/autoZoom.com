@@ -7,7 +7,11 @@ class ProductFilter(django_filters.FilterSet):
         ('ascending', 'Ascending'),
         ('descending','Descending')
         )
-    ordering = django_filters.ChoiceFilter(label='Ordering' , choices=CHOICES, method='filter_by_order')
+    ordering = django_filters.ChoiceFilter(
+        label='Ordering' , 
+        choices=CHOICES,
+        method='filter_by_order'
+        )
     
     
     class Meta:

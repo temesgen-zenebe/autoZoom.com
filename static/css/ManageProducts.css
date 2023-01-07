@@ -18,8 +18,6 @@ table th {
   box-shadow: 10px 10px 10px rgba(46, 54, 68, 0.03);
 }
 
-
-
 .text-end {
   text-align: right!important;
 }
@@ -29,8 +27,12 @@ table th {
 *, ::after, ::before {
   box-sizing: border-box;
 }
-user agent stylesheet
-div {
-  display: block;
+
+.table-sm>:not(caption)>*>* {
+  padding: 0.25rem 0.25rem;
+}
+.table>:not(caption)>*>* {
+  padding: 0.3rem 1rem;
+  border-bottom-width: 1px;
 }
 

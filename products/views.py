@@ -4,16 +4,20 @@ from django.views import View
 from .models import Product,Service,Category,Brand
 from django.db.models import Q
 from .filters import ProductFilter   
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger 
+
 
 # Create your views here.
+
 class ProductsListView(ListView):
     model = Product
     template_name = 'products/product_list.html'
     context_object_name = 'productList'
-    #paginate_by: 20
+    paginate_by: 10
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        
         context["filter"] = ProductFilter(self.request.GET, queryset=self.get_queryset())
         return context
     
