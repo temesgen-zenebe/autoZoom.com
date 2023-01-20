@@ -6,7 +6,8 @@ from .views import (
     ProductsDetailViews,
     ServiceListView,
     ServiceDetailViews,
-    SearchResultsView,)
+    SearchResultsView,
+    )
 
 app_name = 'products'
 urlpatterns = [
