@@ -1,7 +1,7 @@
 from django import forms
 from django.forms.widgets import DateInput
 from django.core.exceptions import ValidationError
-from .models import Product,category,Product_location,Stock_info, Picture
+from .models import Product_Stock,Category, Picture
 
 
 def validate_checked(value):
@@ -22,52 +22,25 @@ class ProductForm(forms.ModelForm):
         validators=[validate_checked]
     )
     class Meta:
-        model = Product
+        model = Product_Stock
         fields = (
-                'product_name' ,
-                'part_number', 
+                'store',
+                'product' , 
                 'brand',
-                'description',
+                'quantity',
                 'picture',
                 'cost', 
-                'tags',
                 'price',
                 'off_price_parentage',
-                'off_price', 
-                'available' ,
-                'category',
-                'stock_info', 
-                'supplier',
+                'is_available' ,
+                'shelf_number',
+                'shipping',
+                'tags',
                 'label',
                 'return_police',
+                'product_states',
                 )
         widgets = {}
         
 
-class ProductForm(forms.ModelForm):
-    confirmation = forms.BooleanField(
-        label = 'I certify that the information I have provided is true and i accept the terms.',
-        validators=[validate_checked]
-    )
-    class Meta:
-        model = Product
-        fields = (
-                'product_name' ,
-                'part_number', 
-                'brand',
-                'description',
-                'picture',
-                'cost', 
-                'tags',
-                'price',
-                'off_price_parentage',
-                'off_price', 
-                'available' ,
-                'category',
-                'stock_info', 
-                'supplier',
-                'label',
-                'return_police',
-                )
-        widgets = {}
         

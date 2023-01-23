@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView,ListView,DetailView
 from django.views import View
-from .models import Product,Service,Category,Brand
+from .models import Product_Stock,Service,Category,Brand
 from django.db.models import Q
 from .filters import ProductFilter   
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger 
@@ -10,7 +10,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # Create your views here.
 
 class ProductsListView(ListView):
-    model = Product
+    model = Product_Stock
     template_name = 'products/product_list.html'
     context_object_name = 'productList'
     paginate_by: 10
@@ -22,18 +22,18 @@ class ProductsListView(ListView):
         return context
     
     
-
+"""
     def get_queryset(self):  # new
-        searched_list = Product.objects.all()
+        searched_list = Product_Stock.objects.all()
         product_searched = self.request.GET.get("q")
        
         if product_searched != '' and product_searched is not None:
             searched_list = searched_list.filter( Q(part_number__icontains=product_searched) | Q(product_name__icontains=product_searched))
          
-        return searched_list     
+        return searched_list     """
 
 class ProductsDetailViews(DetailView):
-    model = Product
+    model = Product_Stock
     template_name = 'products/product_detail.html'
     context_object_name = 'productDetail'
 
@@ -50,13 +50,13 @@ class ServiceDetailViews(DetailView):
     
 class SearchResultsView(ListView):
     def get(self,request):
-            searched_list = Product.objects.all()
+            searched_list = Product_Stock.objects.all()
             product_searched = self.request.GET.get("q")
             service_searched = self.request.GET.get("q")
             
             if product_searched != '' and product_searched is not None:
                 searched_list = searched_list.filter( 
-                    Q(part_number__icontains=product_searched) | Q(product_name__icontains=product_searched))
+                    Q(part_number__icontains=product_searched) | Q(product__icontains=product_searched))
                 
             if service_searched != '' and service_searched is not None:
                 searched_list =  Service.objects.filter(
@@ -66,8 +66,3 @@ class SearchResultsView(ListView):
            
             return redirect(request , 'products/product_search.html', context)
            
-
-      
-        
-            
-    

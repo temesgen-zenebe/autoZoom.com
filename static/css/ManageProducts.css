@@ -32,7 +32,21 @@ table th {
   padding: 0.25rem 0.25rem;
 }
 .table>:not(caption)>*>* {
-  padding: 0.3rem 1rem;
+  padding: 0.5rem 1rem;
   border-bottom-width: 1px;
 }
+.keywords {
+  margin:  10px auto;
+  font-size: 1em;
 
+}
+.keywords header tr{
+ background-color: lightslategray;
+}
+.product_edit{
+  margin: 5px auto;
+  max-height:  20%;
+  max-width: 50%;
+  background: linear-gradient(to right, rgb(204, 204, 211), rgb(228, 229, 230));
+  color: #000;
+}

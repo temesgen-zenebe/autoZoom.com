@@ -17,3 +17,7 @@ function checkAll(ele) {
         }
     }
 }
+
+
+// drop down in responsive table
+

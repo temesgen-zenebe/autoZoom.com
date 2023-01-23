@@ -26,8 +26,7 @@ class SupplierProfileForm(forms.ModelForm):
                 'supplier_location',
                 'license_number',
                 'license_states',
-                'contract_plan',
-                'confirmation',
+                'states',
                 )
         widgets = {
             'company': forms.TextInput(attrs={'autofocus': True}),

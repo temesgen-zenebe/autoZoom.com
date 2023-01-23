@@ -4,10 +4,10 @@ from .models import (
         Brand,
         Category,
         Cost,
-        Product_location,
-        Stock_info,
+        Store,
         Picture,
-        Product,
+        Product_information,
+        Product_Stock,
         Service,
     )
 
@@ -15,8 +15,8 @@ from .models import (
 @admin.register(Descriptions)
 class DescriptionsAdmin(admin.ModelAdmin):
     model = Descriptions
-    list_display = ['description','product_states','created','update',]
-    
+    list_display = ['description','measurement','industry','application','instraction','warning','created','update']
+   
     def get_readonly_fields(self, request, obj=None):
         if obj: # editing an existing object
             return ('created','update')
@@ -62,20 +62,21 @@ class CostAdmin(admin.ModelAdmin):
             return ('created','update')
         return ()
     
-@admin.register(Product_location)
-class Product_locationAdmin(admin.ModelAdmin):
-    model = Product_location
-    list_display = ['country','city','wereda','kebela','house_number','shelf_number','created','update',]
+@admin.register(Product_information)
+class Product_informationAdmin(admin.ModelAdmin):
+    model = Product_information
+    list_display = ['name','part_number','category','description','slug','barcode','is_active','created','update']
+    
     def get_readonly_fields(self, request, obj=None):
         if obj: # editing an existing object
             return ('created','update')
         return ()
     
-@admin.register(Stock_info)
-class Stock_infoAdmin(admin.ModelAdmin):
-    model = Stock_info
-    list_display = ['quantity','product_location','slug','created','update',]
-    
+@admin.register(Store)
+class StoreAdmin(admin.ModelAdmin):
+    model = Store
+    list_display = ['supplier','branch','location_lick','contact_name','email','website','country','city','wereda_kebela','slug','created','update',]
+   
     def get_readonly_fields(self, request, obj=None):
         if obj: # editing an existing object
             return ('created','update')
@@ -84,7 +85,7 @@ class Stock_infoAdmin(admin.ModelAdmin):
 @admin.register(Picture)
 class PictureAdmin(admin.ModelAdmin):
     model = Picture
-    list_display = ['picture','picture2','picture3','picture4','alt','created','update',]
+    list_display = ['picture','picture2','picture3','picture4','picture5','picture6','alt','created','update',]
     
     def get_readonly_fields(self, request, obj=None):
         if obj: # editing an existing object
@@ -92,32 +93,32 @@ class PictureAdmin(admin.ModelAdmin):
         return ()
     
     
-@admin.register(Product)
-class ProductAdmin(admin.ModelAdmin):
-    model = Product
-    search_fields = ['part_number', 'product_name','category']
+@admin.register(Product_Stock)
+class Product_StockAdmin(admin.ModelAdmin):
+    model = Product_Stock
+    search_fields = ['store', 'product']
     list_display = [
-        'product_name' ,
-        'part_number', 
+        'store',
+        'product' , 
         'brand',
-        'description',
+        'quantity',
         'picture',
         'cost', 
-        'tags',
         'price',
         'off_price_parentage',
         'off_price', 
-        'available' ,
-        'category',
-        'stock_info', 
-        'supplier',
+        'is_available' ,
+        'shelf_number',
+        'shipping',
+        'tags',
         'label',
         'return_police',
+        'product_states',
         'slug',
+        'barcode',
         'created',
         'update', 
     ]
-    
     
     def get_readonly_fields(self, request, obj=None):
         if obj: # editing an existing object

@@ -2,6 +2,7 @@ from django.contrib import admin
 from .models import (
         Supplier_location,
         Supplier,
+        Contract
         )
 
 # Register your models here.
@@ -37,11 +38,7 @@ class SupplierAdmin(admin.ModelAdmin):
                 'supplier_location',
                 'license_number',
                 'license_states',
-                'contract_code' ,
-                'contract_plan',
-                'contract_status',
-                'date_of_expiration',
-                'confirmation',
+                'states',
                 'slug' ,
                 'created',
                 'update',
@@ -51,3 +48,25 @@ class SupplierAdmin(admin.ModelAdmin):
             return ('slug','created','update')
 
         return ()
+    
+@admin.register(Contract)
+class ContractAdmin(admin.ModelAdmin):
+    model = Contract
+    list_display = [ 
+            'contract_code' ,
+            'contract_plan',
+            'date_of_acceptance' ,
+            'date_of_expiration',
+            'supplier',
+            'contract_with', 
+            'contract_status' ,
+            'slug', 
+            'created' ,
+            'update' , 
+            ]
+    def get_readonly_fields(self, request, obj=None):
+        if obj: # editing an existing object
+            return ('slug','created','update')
+
+        return ()   
+      

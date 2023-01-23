@@ -43,8 +43,7 @@ class Supplier_location(models.Model):
 class Supplier(models.Model):
     LICENSE_STATES = ((None, '--Please choose--'),('active', 'active'),('pending', 'pending'), 
               ('suspended', 'suspended'),)
-    CONTRACT_PLAN = ((None, '--Please choose--'),('yearly', 'yearly'),('3years', '3years'), 
-              ('5years', '5years'),)
+   
     BUSINESS_TYPE = ((None, '--Please choose--'),('Product', 'product'),('service', 'service'),)
     
     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE, related_name='seller')
@@ -57,16 +56,7 @@ class Supplier(models.Model):
     supplier_location = models.ForeignKey(Supplier_location ,on_delete=models.CASCADE , blank=True ,null=True )
     license_number = models.CharField(verbose_name="License Number",max_length=100,blank=True ,null=True)
     license_states = models.CharField(verbose_name="License States",max_length=30, choices=LICENSE_STATES)
-    contract_code = models.CharField(verbose_name="contract code", max_length=20, default= getUniqueCode, blank=False ,null=False)
-    contract_plan = models.CharField(verbose_name="contract plan", max_length=30, default="yearly", choices=CONTRACT_PLAN)
-    date_of_acceptance = models.DateField(auto_now_add=True, blank=True, null=True)
-    date_of_expiration = models.DateField(
-        verbose_name="contract expiration date", 
-        help_text = 'contract expiration date',
-        validators=[validate_future_date]
-        )
-    contract_status = models.BooleanField(default=False)
-    confirmation = models.BooleanField(default=False)
+    states = models.BooleanField(default=False)
     slug = models.SlugField(max_length=50, unique=True, null=False, editable=False)
     created = models.DateField(auto_now_add=True)
     update = models.DateField(auto_now=True)
@@ -74,11 +64,35 @@ class Supplier(models.Model):
     
     def get_absolute_url(self):
       return reverse('seller:detail', args=[self.slug])
+      
+    def createdDate(self):
+        self.created = timezone.now()
+        self.save()
     
+    def __str__(self):
+        return self.company
+    
+
+class Contract(models.Model):
+    CONTRACT_PLAN = ((None, '--Please choose--'),('yearly', 'yearly'),('3years', '3years'), ('5years', '5years'),) 
+    CONTRACT_STATUS = ((None, '--Please choose--'),('active', 'active'),('pending', 'pending'), ('suspended', 'suspended'),)  
+    
+    contract_code = models.CharField(verbose_name="contract code", max_length=20, default= getUniqueCode, blank=False ,null=False)
+    contract_plan = models.CharField(verbose_name="contract plan", max_length=30, default="yearly", choices=CONTRACT_PLAN)
+    date_of_acceptance = models.DateField(auto_now_add=True, blank=True, null=True)
+    date_of_expiration = models.DateField(verbose_name="contract expiration date", help_text = 'contract expiration date',validators=[validate_future_date])
+    supplier = models.OneToOneField(Supplier, on_delete=models.CASCADE)
+    contract_with = models.CharField(max_length=100,default="autoZoom.inc")
+    contract_status = models.CharField(max_length=30, default="pending", choices=CONTRACT_STATUS)  
+    slug = models.SlugField(max_length=100, unique=True, null=False, editable=False)
+    created = models.DateField(auto_now_add=True)
+    update = models.DateField(auto_now=True)                                    
+   
     def save(self, *args, **kwargs):
         if not self.slug:
             value = str(self)
             self.slug = unique_slug(value, type(self))   
+            
         if self.contract_plan=="5years":
             self.date_of_expiration=now() + timedelta(days=1800)
             
@@ -95,8 +109,4 @@ class Supplier(models.Model):
         self.save()
     
     def __str__(self):
-        return self.company
-    
-
-                                              
-   
+        return str(self.contract_code)

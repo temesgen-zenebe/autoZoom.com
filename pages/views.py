@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from seller.forms import SupplierProfileForm
 from seller.models import Supplier
-from products.models import Product,Service
+from products.models import Product_Stock,Service
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView, UpdateView,TemplateView)
 from django.views import View

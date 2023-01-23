@@ -1,5 +1,5 @@
 import django_filters 
-from .models import Product
+from .models import Product_Stock
 
 
 class ProductFilter(django_filters.FilterSet):
@@ -15,8 +15,8 @@ class ProductFilter(django_filters.FilterSet):
     
     
     class Meta:
-        model = Product 
-        fields = ('product_name','part_number', 'brand','tags','category')
+        model = Product_Stock 
+        fields = ('product', 'brand','tags')
         
     def filter_by_order(self, queryset,name ,value):
         expression = 'created' if value =='ascending' else '-created'

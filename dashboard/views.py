@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from django.views.generic import TemplateView
 from seller.forms import SupplierProfileForm
 from seller.models import Supplier
-from products.models import Product
+from products.models import Product_Stock
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView, UpdateView,TemplateView)
 from django.views import View
@@ -25,7 +25,7 @@ class ManageProduct(TemplateView):
     
 
 class ProductInfoView(CreateView, LoginRequiredMixin):   
-    model = Product
+    model = Product_Stock
     paginate_by = 10
     
     def form_valid(self, form):
@@ -36,7 +36,7 @@ class ProductInfoView(CreateView, LoginRequiredMixin):
         #users = self.request.user
         form = ProductForm()
         #forms = inlineformset_factory(Supplier, Product, form )
-        product_list = Product.objects.all()
+        product_list = Product_Stock.objects.all()
     
         context = {'product_list':product_list,'form': form}
         return render(request , 'dashboard/manageProduct.html',context)
