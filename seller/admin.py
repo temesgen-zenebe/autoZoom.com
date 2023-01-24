@@ -16,12 +16,13 @@ class Supplier_locationAdmin(admin.ModelAdmin):
             'kebela',
             'house_number',
             'Building_number',
+            'slug',
             'created',
             'update',
         ]
     def get_readonly_fields(self, request, obj=None):
         if obj: # editing an existing object
-            return ('created','update')
+            return ('slug','created','update')
 
         return ()
     
@@ -39,7 +40,7 @@ class SupplierAdmin(admin.ModelAdmin):
                 'license_number',
                 'license_states',
                 'states',
-                'slug' ,
+                'slug',
                 'created',
                 'update',
             ]

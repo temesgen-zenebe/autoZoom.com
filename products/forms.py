@@ -11,9 +11,7 @@ def validate_checked(value):
 class PictureForm(forms.ModelForm):
     class Meta:
         model = Picture
-        fields = (
-                  'picture','picture2','picture3','picture4','alt'
-                )
+        fields = ('picture','picture2','picture3','picture4','picture5','picture6','alt')
         widgets = {}
     
 class ProductForm(forms.ModelForm):

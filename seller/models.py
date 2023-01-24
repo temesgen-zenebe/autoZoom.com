@@ -34,9 +34,19 @@ class Supplier_location(models.Model):
     kebela = models.CharField(max_length=100, blank=True ,null=True )
     house_number = models.CharField(max_length=100, blank=True ,null=True )
     Building_number = models.CharField(max_length=100, blank=True ,null=True )
+    slug = models.SlugField(max_length=50, unique=True, null=False, editable=False)
     created = models.DateField(auto_now_add=True)
     update = models.DateField(auto_now=True)
     
+    def get_absolute_url(self):
+      return reverse('seller:supplier_location_detail', kwargs={'slug': self.slug})
+  
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            value = str(self)
+            self.slug = unique_slug(value, type(self))
+        super().save(*args, **kwargs)
+        
     def __str__(self):
         return self.city
 
@@ -61,9 +71,14 @@ class Supplier(models.Model):
     created = models.DateField(auto_now_add=True)
     update = models.DateField(auto_now=True)
     
-    
     def get_absolute_url(self):
-      return reverse('seller:detail', args=[self.slug])
+      return reverse('seller:detail', kwargs={'slug': self.slug})
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            value = str(self)
+            self.slug = unique_slug(value, type(self))
+        super().save(*args, **kwargs)
       
     def createdDate(self):
         self.created = timezone.now()
@@ -86,7 +101,10 @@ class Contract(models.Model):
     contract_status = models.CharField(max_length=30, default="pending", choices=CONTRACT_STATUS)  
     slug = models.SlugField(max_length=100, unique=True, null=False, editable=False)
     created = models.DateField(auto_now_add=True)
-    update = models.DateField(auto_now=True)                                    
+    update = models.DateField(auto_now=True) 
+    
+    def get_absolute_url(self):
+      return reverse('seller:contract_detail', kwargs={'slug': self.slug})                                   
    
     def save(self, *args, **kwargs):
         if not self.slug:

@@ -22,8 +22,19 @@ class Descriptions(models.Model):
     application = models.CharField(max_length=300,blank=True ,null=True)
     instraction =  models.CharField(max_length=300,blank=True ,null=True)
     warning =  models.CharField(max_length=300,blank=True ,null=True)
+    slug = models.SlugField(max_length=50, unique=True, null=False, editable=False)
     created = models.DateField(auto_now_add=True)
     update = models.DateField(auto_now=True)
+    
+    def get_absolute_url(self):
+      return reverse('products:category_update', kwargs={'slug': self.slug})
+  
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            value = str(self)
+            self.slug = unique_slug(value, type(self))
+        super().save(*args, **kwargs)
+          
     
     def __str__(self):
         return self.description
@@ -33,18 +44,38 @@ class Brand(models.Model):
     made_in = models.CharField(max_length=100,blank=True ,null=True)
     manufactured = models.CharField(max_length=100,blank=True ,null=True)
     manufactured_date = models.DateField(auto_now_add=True, blank=True, null=True)
+    slug = models.SlugField(max_length=50, unique=True, null=False, editable=False)
     created = models.DateField(auto_now_add=True)
     update = models.DateField(auto_now=True)
     
+    def get_absolute_url(self):
+      return reverse('products:category_update', kwargs={'slug': self.slug})
+  
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            value = str(self)
+            self.slug = unique_slug(value, type(self))
+        super().save(*args, **kwargs)
+          
     def __str__(self):
         return self.brand
 
 class Category(models.Model):
     category = models.CharField(max_length=100, blank=True ,null=True )
     sub_category = models.CharField(max_length=100, blank=True ,null=True )
+    slug = models.SlugField(max_length=50, unique=True, null=False, editable=False)
     created = models.DateField(auto_now_add=True)
     update = models.DateField(auto_now=True)
-       
+    
+    def get_absolute_url(self):
+      return reverse('dashboard:updated_category', kwargs={'slug': self.slug})
+  
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            value = str(self)
+            self.slug = unique_slug(value, type(self))
+        super().save(*args, **kwargs)
+          
     def __str__(self):
         return self.category
     
@@ -57,6 +88,9 @@ class Cost(models.Model):
     slug = models.SlugField(max_length=50, unique=True, null=False, editable=False)
     created = models.DateField(auto_now_add=True)
     update = models.DateField(auto_now=True)
+    
+    def get_absolute_url(self):
+      return reverse('products:category_update', kwargs={'slug': self.slug})
     
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -82,6 +116,9 @@ class Store(models.Model):
     created = models.DateField(auto_now_add=True)
     update = models.DateField(auto_now=True)
     
+    def get_absolute_url(self):
+      return reverse('products:category_update', kwargs={'slug': self.slug})
+    
     def save(self, *args, **kwargs):
         if not self.slug:
             value = str(self)
@@ -89,7 +126,7 @@ class Store(models.Model):
         super().save(*args, **kwargs)
         
     def __str__(self):
-        return str(self.supplier)
+        return str(f'{self.supplier}-branch:{self.branch}')
 
 class Picture(models.Model):
     picture = models.ImageField(upload_to="products/%Y/%m/%d" )
@@ -99,9 +136,19 @@ class Picture(models.Model):
     picture5 = models.ImageField(upload_to="products/%Y/%m/%d" , blank=True)
     picture6 = models.ImageField(upload_to="products/%Y/%m/%d" , blank=True)
     alt = models.CharField(max_length=100, blank=True ,null=True )
+    slug = models.SlugField(max_length=50, unique=True, null=False, editable=False)
     created = models.DateField(auto_now_add=True)
     update = models.DateField(auto_now=True)
     
+    def get_absolute_url(self):
+      return reverse('products:Picture_update', kwargs={'slug': self.slug})
+  
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            value = str(self)
+            self.slug = unique_slug(value, type(self))
+        super().save(*args, **kwargs)
+  
     def __str__(self):
         return str(self.picture)
        
@@ -114,7 +161,7 @@ class Service(models.Model):
     price = models.DecimalField(decimal_places=2,max_digits=6, blank=True,null=True  )
     off_price_parentage = models.SmallIntegerField(blank=True , null=True)
     off_price = models.DecimalField(decimal_places=2, max_digits=6, blank=True, null=True)
-    category = models.ForeignKey(Category ,on_delete=models.CASCADE, blank=True,null=True )
+    category = models.ForeignKey(Category ,on_delete=models.PROTECT, blank=True,null=True )
     supplier = models.ForeignKey(Supplier ,on_delete=models.PROTECT , blank=True ,null=True )
     location = models.CharField(max_length=100)
     contact = models.CharField(max_length=100)
@@ -130,9 +177,9 @@ class Service(models.Model):
         if not self.slug:
             value = str(self)
             self.slug = unique_slug(value, type(self))
-        """ 
+        
         if self.tags == 'sell':
-            self.off_price  = self.price - ((self.price * self.off_price_parentage)/100)"""
+            self.off_price  = self.price - ((self.price * self.off_price_parentage)/100)
             
         super().save(*args, **kwargs)
 
@@ -152,13 +199,16 @@ class Service(models.Model):
 class Product_information(models.Model):
     name = models.CharField(max_length=600,blank=True ,null=True)
     part_number = models.CharField(max_length=600,blank=True ,null=True)
-    category = models.ForeignKey(Category ,on_delete=models.CASCADE,blank=True ,null=True)
+    category = models.ForeignKey(Category ,on_delete=models.PROTECT,blank=True ,null=True)
     description = models.ForeignKey(Descriptions ,on_delete=models.CASCADE, blank=True,null=True )
     slug = models.SlugField(max_length=50, unique=True, null=False, editable=False)
     barcode = models.ImageField(upload_to='barcodes/', blank=True)
     is_active = models.BooleanField(default=True)
     created = models.DateField(auto_now_add=True)
     update = models.DateField(auto_now=True)
+    
+    def get_absolute_url(self):
+      return reverse('products:product-detail', kwargs={'slug': self.slug})
     
     def save(self, *args, **kwargs): # overriding save() 
         if not self.slug:
@@ -170,6 +220,7 @@ class Product_information(models.Model):
         code = COD128(f'{self.name}', writer=ImageWriter()).write(rv)
         self.barcode.save(f'{self.name}.png', File(rv), save=False)
         return super().save(*args, **kwargs)
+    
     def __str__(self):
         return str(self.name)
     

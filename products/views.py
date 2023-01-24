@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView,ListView,DetailView
+from django.views.generic.edit import UpdateView 
 from django.views import View
 from .models import Product_Stock,Service,Category,Brand
 from django.db.models import Q
@@ -65,4 +66,5 @@ class SearchResultsView(ListView):
             context = {'object_list':searched_list,}
            
             return redirect(request , 'products/product_search.html', context)
-           
+
+    

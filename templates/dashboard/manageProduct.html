@@ -4,7 +4,7 @@
 {% block javascript %}
 
 <script >
-    
+   
 </script>
 
 {% endblock %}
@@ -58,8 +58,7 @@
             <div class="card">
                 <div class="card-header bg-white"><p>Search Result<span>({{product_list|length}})</span></p></div>
                 <div class="card-body">
-                    <div class="row" >
-                        
+                    <div class="row">
                         <div class="table-responsive" style="overflow:auto;">
                             <table class="table table-hover " id="keywords">
                         
@@ -68,8 +67,8 @@
                                     <th scope="col">
                                         <div class="form-check"><input onchange="checkAll(this)"  class="form-check-input" type="checkbox" value="" id="flexCheckDefault" /></div>
                                     </th> 
-                                    <th class="pro_table" scope="col" >Name</th>
-                                    <th class="pro_table" scope="col" >Number</th>
+                                    <th class="pro_table" scope="col" >store</th>
+                                    <th class="pro_table" scope="col" >product</th>
                                     <th class="pro_table" scope="col" >Brand</th>
                                     <th class="pro_table" scope="col" >Cost</th>
                                     <th class="pro_table" scope="col" >Tags</th>
@@ -81,6 +80,7 @@
                                     <th class="pro_table" scope="col">Supplier</th>
                                     <th class="pro_table" scope="col">Label</th>
                                     <th class="pro_table" scope="col">Return</th>
+                                    <th class="pro_table" scope="col">States</th>
                                     <th class="pro_table" scope="col">Created</th>
                                     <th class="pro_table" scope="col">Update</th>
                                     <th class="pro_table" scope="col">Action</th>
@@ -89,35 +89,79 @@
                                 {% if product_list %}
                                 <tbody >
                                     {% for product in product_list %}
-                                    {% if  user == product.supplier.user%}
+                                    {% if  user == product.store.supplier.user%}
                                     <tr class="pro_table">
                                     <th scope="row"><div class="form-check">
                                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1" /></div></th>
                                         
-                                    <td  class="lalign" >{{ product.product_name}}</td>
-                                    <td>{{ product.part_number}}</td>
+                                    <td  class="lalign" >{{ product.store}}</td>
+                                    <td>{{ product.product.part_number}}</td>
                                     <td>{{ product.brand}}</td>
                                     <td>{{ product.cost}}</td>
                                     <td>{{ product.tags}}</td>
                                     <td>{{ product.price}}</td>
                                     <td>{{ product.off_price_parentage}}</td>
-                                    <td>{{ product.available}}</td>
-                                    <td>{{ product.category}}</td>
-                                    <td>{{ product.stock_info}}</td>
-                                    <td>{{ product.supplier}}</td>
+                                    <td>{{ product.is_available}}</td>
+                                    <td>{{ product.product.category}}</td>
+                                    <td>{{ product.quantity}}</td>
+                                    <td>{{ product.store.supplier}}</td>
                                     <td>{{ product.label}}</td>
                                     <td>{{ product.return_police}}</td>
+                                    <td>{{ product.product_states}}</td>
                                     <td>{{ product.created}}</td>
                                     <td>{{ product.update}}</td>
                                     <td>
                                         <div class="btn-group me-2 gap-2" role="group" aria-label="First group">
-                                            <button type="button" class="btn btn-sm btn-outline-primary" fdprocessedid="5bcwt" 
-                                            data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="bi bi-pencil-square"></i></button>
-                                            <button type="button" class="btn btn-sm btn-outline-primary" fdprocessedid="b0nvn"><i class="bi bi-trash"></i></button>
+                                            <a type="button" class="btn btn-sm btn-outline-primary" fdprocessedid="5bcwt" 
+                                            data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="bi bi-pencil-square"></i></a>
+                                            <a type="button" class="btn btn-sm btn-outline-primary" fdprocessedid="b0nvn"><i class="bi bi-trash"></i></a>
                                         </div>
                                     </td>
                                     
                                     </tr>
+                                    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                                        <div class="offcanvas-header">
+                                            <h5 class="offcanvas-title" id="offcanvasRightLabel">Edit Product</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                        </div>
+                                        <div class="row offcanvas-body gap-2">
+                                            {% if product.product.category.slug %}
+                                            <a href="{% url 'dashboard:updated_category' product.product.category.slug %}" type="button" class="col-12 btn btn-sm btn-outline-primary product_edit" id="category">
+                                                <i class="bi bi-pen mx-1"></i> <p> Category</p>
+                                            </a>
+                                            {% endif %}
+                                            {% if product.brand.slug %}
+                                            <a href="{% url 'dashboard:updated_brand' product.brand.slug %}" type="button" class="col-12 btn btn-sm btn-outline-primary product_edit" >
+                                                <i class="bi bi-pen mx-1"></i> <p> Brand</p>
+                                            </a>
+                                            {% endif %}
+                                            {% if product.picture.slug %}
+                                            <a href="{% url 'dashboard:updated_picture' product.picture.slug %}" type="button" class="col-12 btn btn-sm btn-outline-primary product_edit" >
+                                                <i class="bi bi-pen mx-1"></i> <p> Image</p>
+                                            </a>
+                                            {% endif %}
+                                            {% if product.store.slug %}
+                                            <a href="{% url 'dashboard:updated_store' product.store.slug %}" type="button" class="col-12 btn btn-sm btn-outline-primary product_edit" >
+                                                <i class="bi bi-pen mx-1"></i> <p> Store</p>
+                                            </a>
+                                            {% endif %}
+                                            {% if product.product.description.slug %}
+                                            <a href="{% url 'dashboard:updated_description' product.product.description.slug %}" type="button" class="col-12 btn btn-sm btn-outline-primary product_edit" >
+                                                <i class="bi bi-pen mx-1"></i> <p> Descriptions</p>
+                                            </a>
+                                            {% endif %}
+                                            {% if product.product.slug %}
+                                            <a href="{% url 'dashboard:updated_product' product.product.slug %}" type="button" class="col-12 btn btn-sm btn-outline-primary product_edit" >
+                                                <i class="bi bi-pen mx-1"></i> <p> Product</p>
+                                            </a>
+                                            {% endif %} 
+                                            {% if product.slug %}
+                                            <a  href="{% url 'dashboard:updated_ProductStock' product.slug %}" type="button" class="col-12 btn btn-sm btn-outline-primary product_edit" >
+                                                <i class="bi bi-pen mx-1"></i> <p>Stack</p>
+                                            </a>
+                                            {% endif %}
+                                        </div>
+                                    </div>
                                     {% else %}
                                     <div class="btn-group btn-group-sm gap-1" role="group" aria-label="Small button group">
                                             oops you do not add any product to your store!! click to add products
@@ -132,38 +176,7 @@
                             </table>
                         </div>
                     </div>
-                    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-                    <div class="offcanvas-header">
-                        <h5 class="offcanvas-title" id="offcanvasRightLabel">
-                        Edit Product
-                        </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                    </div>
-                    <div class="row offcanvas-body gap-2">
-                        <a href="#" type="button" class="col-12 btn btn-sm btn-outline-primary product_edit" >
-                            <i class="bi bi-pen mx-1"></i> <p> Catagory</p>
-                        </a>
-                        <button href="#" type="button" class="col-12 btn btn-sm btn-outline-primary product_edit" >
-                            <i class="bi bi-pen mx-1"></i> <p> Catagory</p>
-                        </button>
-                        <button href="#" type="button" class="col-12 btn btn-sm btn-outline-primary product_edit" >
-                            <i class="bi bi-pen mx-1"></i> <p> Catagory</p>
-                        </button>
-                        <button href="#" type="button" class="col-12 btn btn-sm btn-outline-primary product_edit" >
-                            <i class="bi bi-pen mx-1"></i> <p> Catagory</p>
-                        </button>
-                        <button href="#" type="button" class="col-12 btn btn-sm btn-outline-primary product_edit" >
-                            <i class="bi bi-pen mx-1"></i> <p> Catagory</p>
-                        </button>
-                        <button href="#" type="button" class="col-12 btn btn-sm btn-outline-primary product_edit" >
-                            <i class="bi bi-pen mx-1"></i> <p> Catagory</p>
-                        </button>
-                        <button href="#" type="button" class="col-12 btn btn-sm btn-outline-primary product_edit" >
-                            <i class="bi bi-pen mx-1"></i> <p> Catagory</p>
-                        </button>
-                        
-                    </div>
-                    </div>
+                    
                 </div>  
                 <div class="mx-auto">
                     <nav aria-label="Page navigation example">

@@ -15,11 +15,11 @@ from .models import (
 @admin.register(Descriptions)
 class DescriptionsAdmin(admin.ModelAdmin):
     model = Descriptions
-    list_display = ['description','measurement','industry','application','instraction','warning','created','update']
+    list_display = ['description','measurement','industry','application','instraction','warning','slug','created','update']
    
     def get_readonly_fields(self, request, obj=None):
         if obj: # editing an existing object
-            return ('created','update')
+            return ('slug','created','update')
 
         return ()
     
@@ -30,6 +30,7 @@ class BrandAdmin(admin.ModelAdmin):
                     'brand',
                     'made_in',
                     'manufactured',
+                    'slug',
                     'created',
                     'update',
                 ]
@@ -43,7 +44,7 @@ class BrandAdmin(admin.ModelAdmin):
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     model = Category
-    list_display = ['category','sub_category','created','update',]   
+    list_display = ['category','sub_category','slug','created','update',]   
     
     
     def get_readonly_fields(self, request, obj=None):
@@ -85,7 +86,7 @@ class StoreAdmin(admin.ModelAdmin):
 @admin.register(Picture)
 class PictureAdmin(admin.ModelAdmin):
     model = Picture
-    list_display = ['picture','picture2','picture3','picture4','picture5','picture6','alt','created','update',]
+    list_display = ['picture','picture2','picture3','picture4','picture5','picture6','alt','slug','created','update',]
     
     def get_readonly_fields(self, request, obj=None):
         if obj: # editing an existing object
