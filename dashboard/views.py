@@ -176,7 +176,7 @@ class productStockCreate(CreateView):
         messages.success(self.request, "The product Stock Information was created successfully.")
         return super(productStockCreate,self).form_valid(form)         
     
-
+#-------Deleting Stock-------
 
 class StockDeleteView(DeleteView):
     model = Product_Stock
@@ -187,3 +187,6 @@ class StockDeleteView(DeleteView):
         messages.success(self.request,"The product Stock Information has been deleted successfully.")
         return super(StockDeleteView,self).form_valid(form)  
     
+class MultipleStockDelete(View):
+    def post(self, request, *args, **kwargs):
+        pass

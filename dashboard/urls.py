@@ -20,6 +20,7 @@ from .views import(
     ProductInformationCreate,
     productStockCreate, 
     StockDeleteView,
+    MultipleStockDelete,
     )
 from . import views   
 
@@ -47,5 +48,6 @@ urlpatterns = [
     path('dashboard/add_productStock/', productStockCreate.as_view(), name='add_productStock'),
     path('dashboard/ManageProduct/', ManageProduct.as_view(), name='Manage-products'), 
     path('dashboard/delete_stack/<slug:slug>', StockDeleteView.as_view(), name='delete_stack'),
+    path('dashboard/multiple_delete/', MultipleStockDelete.as_view, name='multiple_delete'),
     #path('dashboard/ManageProduct/search/', views.search, 'search'),
 ]
