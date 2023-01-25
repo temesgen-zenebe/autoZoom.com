@@ -101,7 +101,6 @@ class Cost(models.Model):
     def __str__(self):
         return str(self.cost)
 
- 
 class Store(models.Model): 
     supplier = models.ForeignKey(Supplier ,on_delete=models.PROTECT , blank=True ,null=True )
     branch = models.IntegerField(default=1)
@@ -194,8 +193,7 @@ class Service(models.Model):
     
     def __str__(self):
         return self.service_name
-    
-  
+     
 class Product_information(models.Model):
     name = models.CharField(max_length=600,blank=True ,null=True)
     part_number = models.CharField(max_length=600,blank=True ,null=True)
@@ -223,8 +221,7 @@ class Product_information(models.Model):
     
     def __str__(self):
         return str(self.name)
-    
-    
+       
 class Product_Stock(models.Model):
     TAGS = ( (None, '--Please choose--'),('sell', 'sell'),('Hot', 'Hot'),('Fast moving', 'Fast moving'), )
     LABEL = ((None, '--Please choose--'),('Bast seller', 'Bast seller'), ('AutoZoom Choice', 'AutoZoom Choice'),('New', 'New'),)

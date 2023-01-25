@@ -1,0 +1,23 @@
+{% extends "_base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block javascript %}
+   <script type="text/javascript" src="{% static 'js/main.js' %}" defer ></script>
+{% endblock %}
+{% block title %}Add Category {% endblock %}
+{% block main %}
+    
+   
+    <div class="card border shadow m-auto mb-3" style="max-width: 40rem">
+        <div class="card-header bg-white text-center">Add Category</div>
+        <div class="card-body">
+          
+          <form method="post" enctype="multipart/form-data" class="m-auto" novalidate>
+            {% csrf_token %}
+            {{ form|crispy }}
+            <input type="submit" value="Add" class="form-control btn btn-sm btn-outline-primary my-3">
+            <a href="{% url 'dashboard:Product_list'%}" class="form-control btn btn-sm btn-outline-primary">Cancel</a>
+          </form>
+        </div>
+      </div>
+{% endblock %}

@@ -10,6 +10,17 @@
 {% endblock %}
 
 {% block main %}
+    <div class="container">
+        {% if messages %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="bi bi-check-circle"></i>
+                {% for message in messages %}
+                    {{message}}
+                {% endfor %}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endif %}  
+    </div>
     <div class="mx-3 my-5">
         <div class="container-fluid my-1">
             <div class="row">
@@ -43,12 +54,21 @@
                                         <button type="button" class="btn btn-sm btn-outline-secondary"><i class="bi bi-printer mx-1"></i> Print</button>
                                        
                                     </div>
-                                    <div class="">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar align-text-bottom" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                                        This week
-                                    </button>
-                                    </div>
+                                    <div class="dropdown">
+                                        <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-plus-square mx-1"></i>new product
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="{% url 'dashboard:add_category'%}" class="dropdown-item border-1" >Catagory</a></li>
+                                            <li><a href="{% url 'dashboard:add_brand'%}" class="dropdown-item" >Brand</a></li>
+                                            <li><a href="{% url 'dashboard:add_store'%}" class="dropdown-item" >Store</a></li>
+                                            <li><a href="{% url 'dashboard:add_cost'%}" class="dropdown-item" >Cost</a></li>
+                                            <li><a href="{% url 'dashboard:add_descriptions'%}" class="dropdown-item" >Descriptions</a></li>
+                                            <li><a href="{% url 'dashboard:add_picture'%}" class="dropdown-item" >Images</a></li>
+                                            <li><a href="{% url 'dashboard:add_productInformation'%}" class="dropdown-item" >product Information</a></li>
+                                            <li><a href="{% url 'dashboard:add_productStock'%}" class="dropdown-item" >Product Stock</a></li>
+                                        </ul>
+                                      </div>
                                 </div>
                             </div>
                         </div>
@@ -114,7 +134,7 @@
                                         <div class="btn-group me-2 gap-2" role="group" aria-label="First group">
                                             <a type="button" class="btn btn-sm btn-outline-primary" fdprocessedid="5bcwt" 
                                             data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="bi bi-pencil-square"></i></a>
-                                            <a type="button" class="btn btn-sm btn-outline-primary" fdprocessedid="b0nvn"><i class="bi bi-trash"></i></a>
+                                            <a href="{% url 'dashboard:delete_stack' product.slug %}" type="button" class="btn btn-sm btn-outline-primary" fdprocessedid="b0nvn"><i class="bi bi-trash"></i></a>
                                         </div>
                                     </td>
                                     

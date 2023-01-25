@@ -1,0 +1,16 @@
+{% extends "_base.html" %}
+{% load static %}
+{% block javascript %}
+   <script type="text/javascript" src="{% static 'js/main.js' %}" defer ></script>
+{% endblock %}
+{% block title %} Delete Stack{% endblock %}
+{% block main %}
+    
+    <div class="container my-3 mx-auto rounded" style="max-width: 98%;">
+        <form method="post">{% csrf_token %}
+            <p>Are you sure you want to delete "{{ object }}"?</p>
+             <input type="submit" value="Confirm">
+        </form>
+    </div>
+
+{% endblock %}
