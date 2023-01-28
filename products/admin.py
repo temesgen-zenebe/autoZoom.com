@@ -9,6 +9,8 @@ from .models import (
         Product_information,
         Product_Stock,
         Service,
+        Purchased_product,
+        Ordered,
     )
 
     
@@ -152,4 +154,49 @@ class ServiceAdmin(admin.ModelAdmin):
         if obj: # editing an existing object
             return ('slug','created','update')
 
+        return ()
+    
+@admin.register(Purchased_product)
+class PurchasedProductAdmin(admin.ModelAdmin):
+    model = Purchased_product
+    list_display =[
+        'commercial_invoice',
+        'purchased_order',
+        'proforma_invoice',
+        'name',
+        'part_number',
+        'quantity',
+        'category',
+        'description' ,
+        'initial_cost',
+        'cost_add_present',
+        'unit_cost',
+        'currency',
+        'slug',
+        'barcode',
+        'is_active',
+        'created',
+        'update',
+        ]
+    def get_readonly_fields(self, request, obj=None):
+        if obj: # editing an existing object
+            return ('slug','created','update')
+        return ()
+    
+    
+@admin.register(Ordered)
+class OrderedAdmin(admin.ModelAdmin):
+    model = Ordered
+    list_display =[ 
+        'customer',
+        'product',
+        'Quantity',
+        'transaction_id',
+        'is_active',
+        'created',
+        'update',
+    ]
+    def get_readonly_fields(self, request, obj=None):
+        if obj: # editing an existing object
+            return ('created','update')
         return ()

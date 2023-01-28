@@ -111,47 +111,52 @@
                                     {% csrf_token %}
                                     {% for product in product_list %}
                                     {% if  user == product.store.supplier.user%}
-                                    <tr class="pro_table">
-                                    <td scope="row"><div class="form-check">
-                                        <input name="checkboxRow" class="form-check-input" type="checkbox" value="{{product.slug}}" id="flexCheckDefault1" /></div>
-                                    </td>
-                                        
-                                    <td  class="lalign" >{{ product.store}}</td>
-                                    <td>{{ product.product.part_number}}</td>
-                                    <td>{{ product.brand}}</td>
-                                    <td>{{ product.cost}}</td>
-                                    <td>{{ product.tags}}</td>
-                                    <td>{{ product.price}}</td>
-                                    <td>{{ product.off_price_parentage}}</td>
-                                    <td>{{ product.is_available}}</td>
-                                    <td>{{ product.product.category}}</td>
-                                    <td>{{ product.quantity}}</td>
-                                    <td>{{ product.store.supplier}}</td>
-                                    <td>{{ product.label}}</td>
-                                    <td>{{ product.return_police}}</td>
-                                    <td>{{ product.product_states}}</td>
-                                    <td>{{ product.created}}</td>
-                                    <td>{{ product.update}}</td>
-                                    <td>
-                                        <div class="btn-group me-2 gap-2" role="group" aria-label="First group">
-                                            <a type="button" class="btn btn-sm btn-outline-primary" fdprocessedid="5bcwt" 
-                                            data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="bi bi-pencil-square"></i></a>
-                                            <a href="{% url 'dashboard:delete_stack' product.slug %}" type="button" class="btn btn-sm btn-outline-primary" fdprocessedid="b0nvn"><i class="bi bi-trash"></i></a>
-                                        </div>
-                                    </td>
                                     
+                                    <tr id="{{product.id}}" class="pro_table">
+                                        <td scope="row"><div class="form-check">
+                                            <input name="checkboxRow[]" class="form-check-input" type="checkbox" value="{{product.id}}" id="flexCheckDefault1" /></div>
+                                        </td>
+                                            
+                                        <td  class="lalign" >{{ product.store}}</td>
+                                        <td><a href="{% url 'dashboard:updated_product' product.product.slug %}">{{ product.product.part_number}}</a></td>
+                                        <td><a href="{% url 'dashboard:updated_brand' product.brand.slug %}" >{{ product.brand}}</a></td>
+                                        <td>{{ product.cost}}</td>
+                                        <td>{{ product.tags}}</td>
+                                        <td>{{ product.price}}</td>
+                                        <td>{{ product.off_price_parentage}}</td>
+                                        <td>{{ product.is_available}}</td>
+                                        <td>{{ product.product.category}}</td>
+                                        <td>{{ product.quantity}}</td>
+                                        <td>{{ product.store.supplier}}</td>
+                                        <td>{{ product.label}}</td>
+                                        <td>{{ product.return_police}}</td>
+                                        <td>{{ product.product_states}}</td>
+                                        <td>{{ product.created}}</td>
+                                        <td>{{ product.update}}</td>
+                                        <td>
+                                            <div class="btn-group me-2 gap-2" role="group" aria-label="First group">
+                                                <a type="button" class="btn btn-sm btn-outline-primary" fdprocessedid="5bcwt" 
+                                                data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="bi bi-pencil-square"></i></a>
+                                                <a href="{% url 'dashboard:updated_ProductStock' product.slug %}" type="button" class="btn btn-sm btn-outline-primary" fdprocessedid="b0nvn"><i class="bi bi-pencil-square"></i></a>
+                                                <a href="{% url 'dashboard:delete_stack' product.slug %}" type="button" class="btn btn-sm btn-outline-primary" fdprocessedid="b0nvn"><i class="bi bi-trash"></i></a>
+                                            </div>
+                                        </td>
                                     </tr>
+                                    {{product.brand.slug}}
+                                    {{product.brand.slug}}
                                     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
                                         <div class="offcanvas-header">
                                             <h5 class="offcanvas-title" id="offcanvasRightLabel">Edit Product</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                                         </div>
                                         <div class="row offcanvas-body gap-2">
+                                            
                                             {% if product.product.category.slug %}
                                             <a href="{% url 'dashboard:updated_category' product.product.category.slug %}" type="button" class="col-12 btn btn-sm btn-outline-primary product_edit" id="category">
                                                 <i class="bi bi-pen mx-1"></i> <p> Category</p>
                                             </a>
                                             {% endif %}
+                                        
                                             {% if product.brand.slug %}
                                             <a href="{% url 'dashboard:updated_brand' product.brand.slug %}" type="button" class="col-12 btn btn-sm btn-outline-primary product_edit" >
                                                 <i class="bi bi-pen mx-1"></i> <p> Brand</p>
@@ -172,7 +177,8 @@
                                                 <i class="bi bi-pen mx-1"></i> <p> Descriptions</p>
                                             </a>
                                             {% endif %}
-                                            {% if product.product.slug %}
+                                            {{product.product.slug}}
+                                            {% if product.product %}
                                             <a href="{% url 'dashboard:updated_product' product.product.slug %}" type="button" class="col-12 btn btn-sm btn-outline-primary product_edit" >
                                                 <i class="bi bi-pen mx-1"></i> <p> Product</p>
                                             </a>
@@ -184,11 +190,8 @@
                                             {% endif %}
                                         </div>
                                     </div>
-                                    {% else %}
-                                    <div class="btn-group btn-group-sm gap-1" role="group" aria-label="Small button group">
-                                            oops you do not add any product to your store!! click to add products
-                                    </div>
-                                    
+                                    {{product.brand.slug}}
+                                    {{product.store.supplier.user}}={{user}}
                                     {% endif %}
                                     {% endfor %}
                                     

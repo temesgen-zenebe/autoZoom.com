@@ -1,5 +1,7 @@
 from cProfile import label
 import email
+from random import choice
+from string import digits
 from email.mime import application
 from locale import currency
 from unicodedata import category
@@ -221,7 +223,49 @@ class Product_information(models.Model):
     
     def __str__(self):
         return str(self.name)
-       
+
+class Purchased_product(models.Model):
+    commercial_invoice = models.CharField(max_length=100,blank=True ,null=True)
+    purchased_order= models.CharField(max_length=100,blank=True ,null=True)
+    proforma_invoice = models.CharField(max_length=100,blank=True ,null=True)
+    name = models.CharField(max_length=600,blank=True ,null=True)
+    part_number = models.CharField(max_length=600,blank=True ,null=True)
+    quantity = models.SmallIntegerField(default=0) 
+    category = models.CharField(max_length=600,blank=True ,null=True)
+    description = models.ForeignKey(Descriptions ,on_delete=models.CASCADE, blank=True,null=True)
+    initial_cost = models.DecimalField(max_digits=9,decimal_places=2,default=1.00)
+    cost_add_present =models.SmallIntegerField(default=0)
+    unit_cost = models.DecimalField(max_digits=9,decimal_places=2,default=1.00) 
+    currency = models.CharField(max_length=50,blank=True ,null=True)
+    slug = models.SlugField(max_length=50, unique=True, null=False, editable=False)
+    barcode = models.ImageField(upload_to='barcodes/', blank=True)
+    is_active = models.BooleanField(default=True)
+    created = models.DateField(auto_now_add=True)
+    update = models.DateField(auto_now=True)
+    
+    def get_absolute_url(self):
+      return reverse('products:purchased_product_detail', kwargs={'slug': self.slug})
+    
+    def save(self, *args, **kwargs): # overriding save() 
+        #slug
+        if not self.slug:
+            value = str(self)
+            self.slug = unique_slug(value, type(self))
+        #unit_cost    
+        if not self.cost_add_present == 0:    
+            self.unit_cost = ((self.initial_cost*self.cost_add_present )/100) + self.initial_cost
+        else: 
+            self.unit_cost = self.initial_cost
+        
+        COD128 = barcode.get_barcode_class('code128')
+        rv = BytesIO()
+        code = COD128(f'{self.name}', writer=ImageWriter()).write(rv)
+        self.barcode.save(f'{self.name}.png', File(rv), save=False)
+        return super().save(*args, **kwargs)
+    
+    def __str__(self):
+        return str(f'{self.name}-{self.part_number}') 
+      
 class Product_Stock(models.Model):
     TAGS = ( (None, '--Please choose--'),('sell', 'sell'),('Hot', 'Hot'),('Fast moving', 'Fast moving'), )
     LABEL = ((None, '--Please choose--'),('Bast seller', 'Bast seller'), ('AutoZoom Choice', 'AutoZoom Choice'),('New', 'New'),)
@@ -277,3 +321,21 @@ class Product_Stock(models.Model):
 
     def __str__(self):
         return str(self.product)
+
+class Ordered(models.Model):
+    def getUniqueCode():
+        code = list()
+        for i in range(9):
+            code.append(choice(digits))
+        return ''.join(code)
+    customer = models.CharField(max_length=50, null=True, blank=True, default='admin_for_now')
+    product =  models.ForeignKey(Product_Stock ,on_delete=models.CASCADE,blank=False ,null=False)
+    Quantity = models.SmallIntegerField(default=1)
+    transaction_id = models.CharField(verbose_name="transaction_id", max_length=20, default= getUniqueCode, blank=False ,null=False)
+    is_active = models.BooleanField(default=True)
+    created = models.DateField(auto_now_add=True)
+    update = models.DateField(auto_now=True)
+    
+    def __str__(self):
+        return str(f'{self.customer}-{self.product}')
+    

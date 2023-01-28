@@ -6,7 +6,7 @@ $("#checkAll").change(function () {
 const bt = document.querySelector('#delete_btn');
         bt.addEventListener('click', (event) => {
             if(confirm("Are you sure you want to delete ?")){
-            let checkboxes = document.querySelectorAll('input[name="checkboxRow"]:checked');
+            let checkboxes = document.querySelectorAll('input[name="checkboxRow[]"]:checked');
             let output = [];
             var csrf = $('input[name=csrfmiddlewaretoken]').val();
             checkboxes.forEach((checkbox) => {
@@ -17,9 +17,15 @@ const bt = document.querySelector('#delete_btn');
             }else{
                 console.log(output);
                 $.ajax({
-                    url:"",
+                    url:'.',
                     method:"POST",
-                    data:{ output, csrfToken:csrf}
+                    data:{output, csrfmiddlewaretoken:csrf },
+                    success:function(response){
+                        for (var i = 0; i < output.length; i++) {
+                            $('tr#'+output[i]+'').css('background-color','#ccc');
+                            $('tr#'+output[i]+'').fadeOut('slow');
+                        }
+                    }
 
                 })
             }

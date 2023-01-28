@@ -189,4 +189,12 @@ class StockDeleteView(DeleteView):
     
 class MultipleStockDelete(View):
     def post(self, request, *args, **kwargs):
+        if request.method =="POST":
+            Product_slugs = request.POST.getlist('output[]')
+            for id in Product_slugs:
+                stack = Product_Stock.objects.get(pk=id)
+                stack.delete()
+            return redirect('Product_create')
+        
+    def get(self, request):
         pass
