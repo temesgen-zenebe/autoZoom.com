@@ -11,6 +11,7 @@ from .models import (
         Service,
         Purchased_product,
         Ordered,
+        Cost_distribution_rat,
     )
 
     
@@ -199,4 +200,25 @@ class OrderedAdmin(admin.ModelAdmin):
     def get_readonly_fields(self, request, obj=None):
         if obj: # editing an existing object
             return ('created','update')
+        return ()
+    
+@admin.register(Cost_distribution_rat)
+class CostDistributionRatAdmin(admin.ModelAdmin):
+    model = Cost_distribution_rat
+    list_display =[   
+        'commercial_invoice' ,
+        'total_Product_cost',
+        'shipping_costs',
+        'customs_fees',
+        'risk_coverage',
+        'overhead_charges',
+        'service_fees',
+        'slug',
+        'cost_add_present',
+        'created' ,
+        'update',
+    ]
+    def get_readonly_fields(self, request, obj=None):
+        if obj: # editing an existing object
+            return ('slug','created','update')
         return ()

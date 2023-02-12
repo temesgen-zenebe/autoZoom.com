@@ -60,7 +60,7 @@ class Brand(models.Model):
         super().save(*args, **kwargs)
           
     def __str__(self):
-        return self.brand
+        return str(f'{self.brand}-{self.made_in}')
 
 class Category(models.Model):
     category = models.CharField(max_length=100, blank=True ,null=True )
@@ -224,6 +224,40 @@ class Product_information(models.Model):
     def __str__(self):
         return str(self.name)
 
+class Cost_distribution_rat(models.Model):
+    commercial_invoice = models.CharField(max_length=100,blank=True ,null=True)
+    total_Product_cost= models.DecimalField(default=1.00, decimal_places=2, max_digits=10)
+    shipping_costs= models.DecimalField(default=1.00, decimal_places=2, max_digits=10)
+    customs_fees= models.DecimalField(default=1.00, decimal_places=2, max_digits=10)
+    risk_coverage= models.DecimalField(default=1.00, decimal_places=2, max_digits=10)
+    overhead_charges = models.DecimalField(default=1.00, decimal_places=2, max_digits=10)
+    service_fees = models.DecimalField(default=1.00, decimal_places=2, max_digits=10)
+    slug = models.SlugField(max_length=50, unique=True, null=False, editable=False)
+    cost_add_present =models.SmallIntegerField(default=0)
+    created = models.DateField(auto_now_add=True)
+    update = models.DateField(auto_now=True)
+    
+    def get_absolute_url(self):
+      return reverse('products:cost_distribution_rat', kwargs={'slug': self.slug})
+  
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            value = str(self)
+            self.slug = unique_slug(value, type(self))
+        if self.commercial_invoice :
+            overall_expenses = (self.shipping_costs + self.customs_fees 
+                        + self.overhead_charges + self.risk_coverage 
+                        + self.service_fees+self.total_Product_cost ) 
+            exception_total_Product_cost = (self.shipping_costs + self.customs_fees 
+                                     + self.overhead_charges + self.risk_coverage 
+                                     + self.service_fees) 
+            self.cost_add_present = (exception_total_Product_cost * 100)/overall_expenses
+            
+        super().save(*args, **kwargs)
+  
+    def __str__(self):
+        return str(self.cost_add_present)
+
 class Purchased_product(models.Model):
     commercial_invoice = models.CharField(max_length=100,blank=True ,null=True)
     purchased_order= models.CharField(max_length=100,blank=True ,null=True)
@@ -244,16 +278,17 @@ class Purchased_product(models.Model):
     update = models.DateField(auto_now=True)
     
     def get_absolute_url(self):
-      return reverse('products:purchased_product_detail', kwargs={'slug': self.slug})
+        return reverse('products:purchased_product_detail', kwargs={'slug': self.slug})
     
     def save(self, *args, **kwargs): # overriding save() 
         #slug
         if not self.slug:
             value = str(self)
             self.slug = unique_slug(value, type(self))
+            
         #unit_cost    
         if not self.cost_add_present == 0:    
-            self.unit_cost = ((self.initial_cost*self.cost_add_present )/100) + self.initial_cost
+            self.unit_cost = ((self.initial_cost*self.cost_add_present)/100) + self.initial_cost
         else: 
             self.unit_cost = self.initial_cost
         
@@ -276,8 +311,9 @@ class Product_Stock(models.Model):
                 ,('let you know on checkout', 'let you know on checkout'), )
     STATES = ((None, '--Please choose--'),('New Brand', 'New Brand'),('Used', 'Used'), 
               ('Refurnished', 'Refurnished'),('Open Box', 'Open Box'),)
-    store = models.ForeignKey(Store ,on_delete=models.PROTECT ,default=1, blank=True ,null=True )
-    product = models.ForeignKey(Product_information ,on_delete=models.CASCADE, blank=False,null=False,related_name="product" )
+    supplier = models.ForeignKey(Supplier ,on_delete=models.CASCADE , blank=True ,null=True )
+    store = models.ForeignKey(Store ,on_delete=models.CASCADE ,default=1)
+    product = models.ForeignKey(Purchased_product ,on_delete=models.CASCADE, blank=False,null=False,related_name="product" )
     brand = models.ForeignKey(Brand ,on_delete=models.CASCADE, blank=True,null=True )
     quantity = models.IntegerField(default=1)
     picture = models.ForeignKey(Picture ,on_delete=models.CASCADE, blank=True,null=True)

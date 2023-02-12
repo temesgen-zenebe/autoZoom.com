@@ -1,9 +1,9 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView
 from seller.forms import SupplierProfileForm
 from seller.models import Supplier
-from products.models import Product_Stock,Category,Store,Product_information,Brand,Picture,Descriptions,Cost
+from products.models import Product_Stock,Category,Store,Product_information,Brand,Picture,Descriptions,Cost,Purchased_product
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView, UpdateView,TemplateView)
 from django.views.generic.edit import UpdateView,CreateView,DeleteView
@@ -83,9 +83,12 @@ class DescriptionsUpdateView(UpdateView):
 	success_url ="/dashboard/product_list/" 
  
 class ProductInformationUpdateView(UpdateView): 
-	model = Product_information
-	fields = ['name','part_number','category','description','barcode','is_active']
-	success_url ="/dashboard/product_list/" 
+    success_url = "/dashboard/product_list/"
+    model = Purchased_product
+    fields = ['commercial_invoice','purchased_order','proforma_invoice','name','part_number', 
+           'quantity', 'category', 'description', 'initial_cost','cost_add_present',
+            'unit_cost','currency','barcode','is_active']
+    
  
 class ProductStockUpdateView(UpdateView): 
 	model = Product_Stock
@@ -117,11 +120,13 @@ class BrandCreate(CreateView):
        
 class StoreCreate(CreateView):
     model = Store
-    fields = ['supplier','branch','location_lick','contact_name','email','website','country','city','wereda_kebela']	
+    fields = ['branch','location_lick','contact_name','email','website','country','city','wereda_kebela']	
     template_name = 'products/add_product_store.html'
     success_url = "/dashboard/product_list/" 
     
     def form_valid(self, form):
+        supplier_user = get_object_or_404(Supplier, user = self.request.user)
+        form.instance.supplier = supplier_user
         messages.success(self.request, "The product Store was created successfully.")
         return super(StoreCreate,self).form_valid(form) 
     
@@ -155,9 +160,26 @@ class PictureCreate(CreateView):
         messages.success(self.request, "The product Images was created successfully.")
         return super(PictureCreate,self).form_valid(form) 
   
-class ProductInformationCreate(CreateView):
-    model = Product_information
-    fields = ['name','part_number','category','description','barcode','is_active']	
+class ProductInformationCreate(LoginRequiredMixin, CreateView):
+    model = Purchased_product
+    #fields = ['name','part_number','category','description','barcode','is_active']	
+    fields =[
+        'commercial_invoice',
+        'purchased_order',
+        'proforma_invoice',
+        'name',
+        'part_number',
+        'quantity',
+        'category',
+        'description' ,
+        'initial_cost',
+        'cost_add_present',
+        'unit_cost',
+        'currency',
+        'barcode',
+        'is_active',
+        
+        ]
     template_name = 'products/add_product_information.html'	
     success_url = "/dashboard/product_list/" 
     
@@ -165,17 +187,20 @@ class ProductInformationCreate(CreateView):
         messages.success(self.request, "The product Information was created successfully.")
         return super(ProductInformationCreate,self).form_valid(form) 
     
-class productStockCreate(CreateView):
+class productStockCreate(LoginRequiredMixin,CreateView):
     model = Product_Stock
-    fields = [ 'store','product','brand','quantity','picture','cost', 'price','off_price_parentage','off_price', 
+    fields = [ 'product','brand','quantity','picture','cost', 'price','off_price_parentage','off_price', 
                 'is_available' ,'shelf_number','shipping','tags','label','return_police','product_states','barcode']	
     template_name = 'products/add_product_stock.html'
     success_url = "/dashboard/product_list/" 
     
     def form_valid(self, form):
+        supplier_user = get_object_or_404(Supplier, user = self.request.user)
+        stores = Store.objects.filter(supplier = supplier_user)
+        form.instance.store = stores.first()
         messages.success(self.request, "The product Stock Information was created successfully.")
         return super(productStockCreate,self).form_valid(form)         
-    
+   
 #-------Deleting Stock-------
 
 class StockDeleteView(DeleteView):

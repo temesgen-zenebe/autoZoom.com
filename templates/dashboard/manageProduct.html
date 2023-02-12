@@ -65,7 +65,7 @@
                                             <li><a href="{% url 'dashboard:add_cost'%}" class="dropdown-item" >Cost</a></li>
                                             <li><a href="{% url 'dashboard:add_descriptions'%}" class="dropdown-item" >Descriptions</a></li>
                                             <li><a href="{% url 'dashboard:add_picture'%}" class="dropdown-item" >Images</a></li>
-                                            <li><a href="{% url 'dashboard:add_productInformation'%}" class="dropdown-item" >product Information</a></li>
+                                            <li><a href="{% url 'dashboard:add_product'%}" class="dropdown-item" >product Information</a></li>
                                             <li><a href="{% url 'dashboard:add_productStock'%}" class="dropdown-item" >Product Stock</a></li>
                                         </ul>
                                       </div>
@@ -118,8 +118,8 @@
                                         </td>
                                             
                                         <td  class="lalign" >{{ product.store}}</td>
-                                        <td><a href="{% url 'dashboard:updated_product' product.product.slug %}">{{ product.product.part_number}}</a></td>
-                                        <td><a href="{% url 'dashboard:updated_brand' product.brand.slug %}" >{{ product.brand}}</a></td>
+                                        <td><a href="{% url 'dashboard:updated_product' product.product.slug %}">{{ product.product.part_number}}-{{ product.product.name}}</a></td>
+                                        <td>{{ product.brand}}</td>
                                         <td>{{ product.cost}}</td>
                                         <td>{{ product.tags}}</td>
                                         <td>{{ product.price}}</td>
